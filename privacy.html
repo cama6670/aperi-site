@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Aperi</title><style>
+:root{--bg:#101418;--surface:#181d23;--primary:#e8734a;--text:#f2f4f6;--muted:#9aa4ae;--line:#ffffff1a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+ font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:56px 24px 80px}
+a{color:var(--primary)}
+h1{font-size:2rem;letter-spacing:-.02em;margin:0 0 6px}
+h2{font-size:1.2rem;margin:2em 0 .4em;border-top:1px solid var(--line);padding-top:1.2em}
+h3{font-size:1rem;margin:1.6em 0 .3em}
+code{background:var(--surface);padding:2px 6px;border-radius:5px;font-size:.9em}
+ul{padding-left:1.2em}li{margin:.35em 0}
+.back{display:inline-block;margin-bottom:28px;font-size:14px;text-decoration:none}
+.updated{color:var(--muted);font-size:14px;margin:0 0 8px}
+blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;color:var(--muted)}
+</style></head>
+<body><div class="wrap"><a class="back" href="index.html">&larr; Aperi</a>
+<p class="updated">Last updated 29 July 2026</p>
+<h1>Privacy Policy — Aperi</h1>
+<p>Aperi (&quot;the app&quot;, &quot;we&quot;) helps you control a tethered camera and get AI</p>
+<p>photography coaching. This policy explains what the app collects, where data</p>
+<p>goes, and your choices. Plain-language summary first; specifics follow.</p>
+<h2>The short version</h2>
+<ul>
+<li>The app has <strong>no accounts and no analytics/tracking SDKs of our own.</strong></li>
+<li>Your <strong>API keys</strong> and <strong>conversation history</strong> stay <strong>on your device</strong>.</li>
+<li>When you ask the coach about a shot, that **photo + camera settings + your</li>
+</ul>
+<p>  message<strong> are sent to </strong>the AI provider you chose** (Google Gemini, Anthropic</p>
+<p>  Claude, or OpenAI) to generate a reply. That&#x27;s the one time your data leaves</p>
+<p>  the device, and it goes to that provider, not to us.</p>
+<ul>
+<li>If ads are shown (free tier), the <strong>Google Mobile Ads (AdMob)</strong> SDK collects</li>
+</ul>
+<p>  advertising identifiers. Removing ads (one-time purchase) stops ad requests.</p>
+<h2>What the app stores on your device</h2>
+<ul>
+<li><strong>API keys</strong> — in the platform secure store (Android DataStore / iOS</li>
+</ul>
+<p>  Keychain). Never transmitted anywhere except, as a bearer credential, to the</p>
+<p>  matching AI provider&#x27;s own API endpoint over HTTPS. Never logged, never sent</p>
+<p>  to us.</p>
+<ul>
+<li><strong>Coaching history</strong> — your questions, the live-view frames you sent, the</li>
+</ul>
+<p>  camera settings at that moment, and the coach&#x27;s replies, saved locally so you</p>
+<p>  can revisit them. You can clear this at any time in the app; uninstalling</p>
+<p>  removes it.</p>
+<ul>
+<li><strong>Preferences</strong> — chosen AI provider/model, connection mode, camera IP,</li>
+</ul>
+<p>  toggles. Local only.</p>
+<h2>What is sent off the device, and to whom</h2>
+<p>1. <strong>AI coaching requests</strong> → the provider you select in Settings:</p>
+<p>   - Google Gemini API (<code>generativelanguage.googleapis.com</code>)</p>
+<p>   - Anthropic Claude API (<code>api.anthropic.com</code>)</p>
+<p>   - OpenAI API (<code>api.openai.com</code>)</p>
+<p>   Each request contains the live-view image, structured camera settings, your</p>
+<p>   typed/spoken text, and recent conversation context. These providers process</p>
+<p>   it under <strong>their</strong> privacy terms and API data-use policies — review them:</p>
+<p>   Google AI, Anthropic, and OpenAI each publish one. <strong>Note:</strong> free-tier</p>
+<p>   Google Gemini usage may be used by Google to improve its products; paid-tier</p>
+<p>   and the other providers&#x27; API traffic is generally excluded from training —</p>
+<p>   verify against each provider&#x27;s current terms.</p>
+<p>2. <strong>Ads (free tier only)</strong> → Google AdMob, which may collect an advertising ID</p>
+<p>   and device/coarse data to serve and measure ads, per Google&#x27;s policies.</p>
+<p>   Buying &quot;Remove ads&quot; stops all ad requests. A consent prompt is shown where</p>
+<p>   required (e.g., EEA/UK).</p>
+<p>3. <strong>In-app purchases / subscriptions</strong> → processed by Google Play Billing /</p>
+<p>   Apple App Store. We never see your payment details.</p>
+<p>We (the developer) do <strong>not</strong> operate our own servers that receive your photos</p>
+<p>or messages in the bring-your-own-key mode. _(If/when a managed AI tier ships,</p>
+<p>this policy will be updated to describe the proxy that relays requests using</p>
+<p>our key and the per-user metering it performs.)_</p>
+<h2>Microphone, camera connection, network</h2>
+<ul>
+<li><strong>Microphone</strong> is used only while you hold/activate voice input, to transcribe</li>
+</ul>
+<p>  your question via the platform speech recognizer. Audio is not recorded or</p>
+<p>  stored by the app.</p>
+<ul>
+<li><strong>USB / Wi-Fi</strong> access is used solely to communicate with your camera.</li>
+<li><strong>Internet</strong> access is used for AI requests, ads (free tier), and purchases.</li>
+</ul>
+<h2>Children</h2>
+<p>Not directed to children under 13 (16 in some regions). No knowing collection</p>
+<p>of children&#x27;s data.</p>
+<h2>Your choices</h2>
+<ul>
+<li>Choose or remove any AI provider key; without a key, no data is sent to a</li>
+</ul>
+<p>  provider.</p>
+<ul>
+<li>Clear coaching history in-app.</li>
+<li>Remove ads via one-time purchase to stop ad data collection.</li>
+<li>Uninstalling deletes all local app data.</li>
+</ul>
+<h2>Changes &amp; contact</h2>
+<p>We&#x27;ll update this policy as the app evolves and note the date above.</p>
+<p>Questions: {{CONTACT_EMAIL}}.</p>
+</div></body></html>

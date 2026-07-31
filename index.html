@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperi — your phone is the viewfinder</title>
+<meta name="description" content="Aperi puts your Sony camera's live view on your phone, lets you tap to focus, and coaches you on exposure and composition while you shoot.">
+<meta property="og:title" content="Aperi — your phone is the viewfinder">
+<meta property="og:description" content="Your Sony camera's live view on your phone, with a coach that reads the frame and tells you why the shot isn't working.">
+<meta property="og:type" content="website">
+<!-- Absolute URLs are required here: a relative og:image does not resolve in
+     link previews and silently shows nothing. -->
+<meta property="og:url" content="https://aperi.photo/">
+<meta property="og:image" content="https://aperi.photo/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aperi — your phone is the viewfinder">
+<meta name="twitter:description" content="Live view from your Sony, and a coach that tells you why the shot isn't working.">
+<meta name="twitter:image" content="https://aperi.photo/img/share.jpg">
+<link rel="canonical" href="https://aperi.photo/">
+<meta name="theme-color" content="#101418">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<style>
+  :root{
+    --bg:#101418; --surface:#181d23; --surface2:#222932;
+    --primary:#e8734a; --text:#f2f4f6; --muted:#9aa4ae; --line:#ffffff1a;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  header{padding:72px 0 56px;text-align:center}
+  .mark{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--primary);font-weight:700}
+  h1{font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.1;margin:.5em 0 .3em;letter-spacing:-.02em}
+  .sub{font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--muted);max-width:34ch;margin:0 auto}
+  .cta{display:inline-flex;gap:10px;align-items:center;margin-top:32px;background:var(--primary);
+       color:#1a0d07;text-decoration:none;font-weight:650;padding:14px 26px;border-radius:999px}
+  .cta:hover{filter:brightness(1.08)}
+  .note{margin-top:14px;font-size:13px;color:var(--muted)}
+  section{padding:48px 0;border-top:1px solid var(--line)}
+  h2{font-size:1.45rem;margin:0 0 8px;letter-spacing:-.01em}
+  .lede{color:var(--muted);margin:0 0 28px;max-width:62ch}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{margin:0 0 6px;font-size:1rem}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  .quote{background:var(--surface);border-left:3px solid var(--primary);border-radius:0 12px 12px 0;
+         padding:18px 22px;margin:0;color:var(--muted)}
+  .quote strong{color:var(--text)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600}
+  .tag{display:inline-block;background:var(--surface2);color:var(--muted);font-size:12px;
+       padding:3px 9px;border-radius:999px;margin-left:6px}
+  footer{padding:40px 0 64px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);text-align:center}
+  footer a{color:var(--muted)}
+  a{color:var(--primary)}
+
+  /* Before and after must ALWAYS render the same size — they are a comparison,
+     and an after frame drawn twice as large flatters it for free. The previous
+     rules gave the after `grid-column:1/-1` between 820 and 1040px, so on a
+     mid-width window it was double the before. One breakpoint, both shots in
+     equal columns, coach beneath. */
+  .demo{display:grid;gap:18px;grid-template-columns:1fr}
+  @media(min-width:760px){
+    .demo{grid-template-columns:1fr 1fr;align-items:start}
+    .demo .shot:first-of-type{order:1}
+    .demo .shot:last-of-type{order:2}
+    .coach{order:3;grid-column:1/-1}
+  }
+  .shot{margin:0}
+  /* aspect-ratio pins both frames to the same shape, so a future image with a
+     different aspect cannot quietly make one side of a comparison larger. */
+  .shot img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;
+            display:block;border:1px solid var(--line)}
+  .shot figcaption{display:flex;align-items:baseline;gap:10px;margin-top:10px;font-size:13px}
+  .lbl{background:var(--surface2);color:var(--muted);padding:3px 10px;border-radius:999px;font-weight:600}
+  .lbl.after{background:var(--primary);color:#1a0d07}
+  .ex{color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .coach{background:var(--surface);border-left:3px solid var(--primary);border-radius:0 12px 12px 0;
+         margin:0;padding:20px 24px}
+  .coach .who{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+              color:var(--primary);font-weight:700;margin-bottom:10px}
+  .coach p{margin:0 0 10px}
+  .coach p:last-child{margin-bottom:0}
+  .coach .quiet{color:var(--muted);font-size:14px}
+
+  .steps{display:grid;gap:22px;grid-template-columns:1fr}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{margin:0}
+  .step img{width:100%;height:auto;border-radius:16px;display:block;
+            border:1px solid var(--line);background:#000}
+  .step figcaption{margin-top:12px;font-size:14px;color:var(--muted);line-height:1.5}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;
+       border-radius:50%;background:var(--primary);color:#1a0d07;font-size:12px;font-weight:700;
+       margin-right:6px;vertical-align:1px}
+  .fineprint{color:var(--muted);font-size:13px;margin:20px 0 0;max-width:70ch}
+  h3.case{font-size:1.05rem;margin:44px 0 18px;padding-top:28px;border-top:1px solid var(--line);
+          color:var(--text)}
+  h3.case:first-of-type{margin-top:8px;padding-top:0;border-top:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark">Aperi</div>
+    <h1>Your phone is the viewfinder.</h1>
+    <p class="sub">Your Sony camera's live view on your phone — and a coach that
+       tells you why the shot isn't working.</p>
+    <a class="cta" href="#beta">Join the beta →</a>
+    <p class="note">iPhone · TestFlight · free while in beta</p>
+  </header>
+
+  <section>
+    <h2>What it does</h2>
+    <p class="lede">Tether the camera and the phone becomes a big, bright
+       viewfinder you can actually work from — mounted on the hot shoe, clamped
+       to a tripod, or in your hand.</p>
+    <div class="grid">
+      <div class="card"><h3>Live view, full size</h3>
+        <p>The camera's feed on your phone, with grids, a live histogram and
+           clipping warnings.</p></div>
+      <div class="card"><h3>Tap to focus</h3>
+        <p>Touch the picture and the camera focuses there. No hunting for the
+           joystick.</p></div>
+      <div class="card"><h3>Exposure by touch</h3>
+        <p>Shutter, aperture, ISO and compensation — step them or open a dial.</p></div>
+      <div class="card"><h3>Browse the card</h3>
+        <p>Every frame on the camera, full screen, pinch to zoom, download as
+           JPEG even from RAW.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>About the coach</h2>
+    <p class="lede">This is the part people ask about, so here it is plainly.</p>
+    <p class="quote"><strong>Aperi never touches your photograph.</strong> It
+       doesn't generate images, retouch them, or edit anything. It reads the frame
+       you're composing and the settings you're using, and tells you what it sees
+       — the way an instructor looking over your shoulder would. The shot stays
+       entirely yours.</p>
+    <div class="grid" style="margin-top:18px">
+      <div class="card"><h3>It knows your settings</h3>
+        <p>Not guessing from pixels — it reads shutter, aperture, ISO and focus
+           mode straight from the camera.</p></div>
+      <div class="card"><h3>It knows your bag</h3>
+        <p>Tell it which lenses you brought and it can suggest switching to one
+           you actually have with you.</p></div>
+      <div class="card"><h3>It speaks</h3>
+        <p>Ask out loud, hear the answer, keep your eye where it belongs.</p></div>
+    </div>
+  </section>
+
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="lede">Three taps, on the phone, while the camera stays on the
+       tripod.</p>
+
+    <div class="steps">
+      <figure class="step">
+        <img src="img/app-1-view.jpg" alt="The app showing a waterfall in live view with a grid and histogram" loading="lazy">
+        <figcaption><span class="num">1</span> Your camera's view, on the phone.
+          Grid, live histogram, exposure across the bottom.</figcaption>
+      </figure>
+      <figure class="step">
+        <img src="img/app-2-stage.jpg" alt="The app offering to send the frame to the coach, with options to add a note or speak" loading="lazy">
+        <figcaption><span class="num">2</span> Tap the sparkle. Send the frame as
+          it is, type a question, or just say it out loud.</figcaption>
+      </figure>
+      <figure class="step">
+        <img src="img/app-3-coach.jpg" alt="The coach's reply, with the camera settings recorded beside the question" loading="lazy">
+        <figcaption><span class="num">3</span> The answer, read aloud if you want
+          it. Your settings are stamped on the question, so old threads still
+          make sense.</figcaption>
+      </figure>
+    </div>
+
+    <p class="fineprint">A real exchange, captured on an iPhone. This walkthrough
+       uses the built-in demo camera — which is why the settings on the question
+       are the demo's rather than the photograph's original ones, and also why you
+       can install the app and try all of this before your camera arrives.</p>
+  </section>
+
+  <section id="demo">
+    <h2>Two real sessions</h2>
+    <p class="lede">Both of these happened. The coaching quoted is what the app
+       actually replied to the first frame in each pair — written before the
+       second photograph existed, and checkable against the EXIF.</p>
+
+    <h3 class="case">Shifen Waterfall — moving water</h3>
+
+    <div class="demo">
+      <figure class="shot">
+        <img src="img/shifen-before.jpg" alt="Shifen Waterfall with the water frozen into messy strands" loading="lazy">
+        <figcaption><span class="lbl">Before</span>
+          <span class="ex">1/50s · f/8 · ISO 100 · 18mm</span></figcaption>
+      </figure>
+
+      <blockquote class="coach">
+        <span class="who">The coach</span>
+        <p>The main issue is your shutter speed of <strong>1/50</strong>. It is in
+           a no-mans-land for moving water, making the falls look messy rather
+           than intentional.</p>
+        <p>To get that classic, silky water, switch to Manual mode, keep ISO 100,
+           and close down to f/16 to force a longer shutter speed,
+           <strong>aiming for 1/2 or slower</strong>. You will need a tripod.</p>
+        <p class="quiet">You either freeze water completely at 1/1000 or paint
+           with it at 1 second. Let us slow it down.</p>
+      </blockquote>
+
+      <figure class="shot">
+        <img src="img/shifen-after.jpg" alt="Shifen Waterfall with the water rendered as smooth silk by a long exposure" loading="lazy">
+        <figcaption><span class="lbl after">After</span>
+          <span class="ex">1/2s · f/22 · ISO 100 · 18mm</span></figcaption>
+      </figure>
+    </div>
+
+    <p class="fineprint">The advice named 1/2 of a second; the next frame was shot
+       at exactly that. Both on the same 18mm prime and ISO 100 — three stops of
+       aperture bought the slower shutter. The framing changed too: APS-C crop mode
+       was switched on and the tripod moved a step closer, so the water is not the
+       only difference you are looking at.</p>
+
+    <h3 class="case">Night street, Taiwan — where the colour lives</h3>
+
+    <div class="demo">
+      <figure class="shot">
+        <img src="img/street-before.jpg" alt="Neon-lit street at night, the signs bright to the point of blowing out" loading="lazy">
+        <figcaption><span class="lbl">Before</span>
+          <span class="ex">A · 1/125s · f/1.8 · ISO 800</span></figcaption>
+      </figure>
+
+      <blockquote class="coach">
+        <span class="who">The coach</span>
+        <p>Your brightest highlights, like those blue and white neon signs, are
+           <strong>completely blown out</strong>.</p>
+        <p>In night street photography, colour lives in the highlights. Because
+           you are in A mode at exposure compensation 0, the camera is trying to
+           make the dark asphalt neutral, which overexposes the signs.</p>
+        <p>Dial your exposure compensation down to <strong>-1.3 EV</strong>. This
+           will protect those rich neon colours and clean up your shadows.</p>
+        <p class="quiet">Let the darkness frame your light.</p>
+      </blockquote>
+
+      <figure class="shot">
+        <img src="img/street-after.jpg" alt="The same street exposed a stop darker, the neon signs holding their colour" loading="lazy">
+        <figcaption><span class="lbl after">After</span>
+          <span class="ex">M · 1/60s · f/2.8 · ISO 400</span></figcaption>
+      </figure>
+    </div>
+
+    <p class="fineprint">The advice asked for about a stop and a third less
+       exposure; the frames measure <strong>0.99 EV darker</strong>. The camera also
+       moved to Manual, which stopped auto-ISO wandering between 800 and 3200 from
+       one frame to the next, and stopping down to f/2.8 put more of the street in
+       focus. It is meant to be darker — that is where the neon gets its colour
+       back.</p>
+  </section>
+
+  <section>
+    <h2>Connecting</h2>
+    <div class="grid">
+      <div class="card"><h3>USB-C <span class="tag">most reliable</span></h3>
+        <p>Set the camera to PC Remote and plug in. It connects on its own.</p></div>
+      <div class="card"><h3>Wi-Fi</h3>
+        <p>Phone and camera on the same network.</p></div>
+      <div class="card"><h3>Wi-Fi Direct</h3>
+        <p>The camera makes its own network. Works anywhere.</p></div>
+    </div>
+  </section>
+
+  <section id="beta">
+    <h2>Which cameras</h2>
+    <p class="lede">Being straight with you, because nothing is more annoying
+       than installing an app that can't see your camera.</p>
+    <table>
+      <tr><th>Camera</th><th>Status</th></tr>
+      <tr><td>Sony A7 V (ILCE-7M5)</td><td>Supported and tested on real hardware</td></tr>
+      <tr><td>Other recent Sony Alpha bodies</td><td>Not yet — likely close, untested. Tell us which you have.</td></tr>
+    </table>
+    <p class="lede" style="margin-top:24px">The AI coach needs an API key from
+       Google, Anthropic or OpenAI — you bring your own, it stays on your phone,
+       and your photos go straight to the provider you chose. Everything else —
+       live view, focus, exposure, the card browser — works without one.</p>
+    <a class="cta" href="#">TestFlight link coming soon</a>
+    <p class="note">Beta testers with a Sony body other than the A7 V are
+       especially welcome — that's how the list above gets longer.</p>
+  </section>
+
+  <footer>
+    <p><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> ·
+       <a href="mailto:support@aperi.photo">Contact</a></p>
+    <p>Aperi is not affiliated with, endorsed by, or sponsored by Sony.
+       Sony and Alpha are trademarks of Sony Group Corporation.</p>
+  </footer>
+
+</div>
+</body>
+</html>
