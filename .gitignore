@@ -1,5 +1,0 @@
-# This folder is pushed to a SEPARATE PUBLIC repo to be served by GitHub Pages.
-# README.md stays behind in the private repo: it carries deploy notes and, more
-# to the point, records that the privacy policy has not had legal review. That is
-# a fine internal note and a poor public advertisement.
-README.md

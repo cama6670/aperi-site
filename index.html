@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aperi — your phone is the viewfinder</title>
+<title>Aperi: your phone is the viewfinder</title>
 <meta name="description" content="Aperi puts your Sony camera's live view on your phone, lets you tap to focus, and coaches you on exposure and composition while you shoot.">
-<meta property="og:title" content="Aperi — your phone is the viewfinder">
+<meta property="og:title" content="Aperi: your phone is the viewfinder">
 <meta property="og:description" content="Your Sony camera's live view on your phone, with a coach that reads the frame and tells you why the shot isn't working.">
 <meta property="og:type" content="website">
 <!-- Absolute URLs are required here: a relative og:image does not resolve in
@@ -15,7 +15,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Aperi — your phone is the viewfinder">
+<meta name="twitter:title" content="Aperi: your phone is the viewfinder">
 <meta name="twitter:description" content="Live view from your Sony, and a coach that tells you why the shot isn't working.">
 <meta name="twitter:image" content="https://aperi.photo/img/share.jpg">
 <link rel="canonical" href="https://aperi.photo/">
@@ -23,276 +23,991 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="img/icon-180.png">
 <style>
-  :root{
-    --bg:#101418; --surface:#181d23; --surface2:#222932;
-    --primary:#e8734a; --text:#f2f4f6; --muted:#9aa4ae; --line:#ffffff1a;
+  :root {
+    --bg: #101418;
+    --surface: #171c20;
+    --text: #f0eee8;
+    --muted: #a5a8a6;
+    --dim: #7b8182;
+    --line: #343a3e;
+    --primary: #e8734a;
+    --gutter: clamp(18px, 4vw, 56px);
   }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
-  header{padding:72px 0 56px;text-align:center}
-  .mark{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--primary);font-weight:700}
-  h1{font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.1;margin:.5em 0 .3em;letter-spacing:-.02em}
-  .sub{font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--muted);max-width:34ch;margin:0 auto}
-  .cta{display:inline-flex;gap:10px;align-items:center;margin-top:32px;background:var(--primary);
-       color:#1a0d07;text-decoration:none;font-weight:650;padding:14px 26px;border-radius:999px}
-  .cta:hover{filter:brightness(1.08)}
-  .note{margin-top:14px;font-size:13px;color:var(--muted)}
-  section{padding:48px 0;border-top:1px solid var(--line)}
-  h2{font-size:1.45rem;margin:0 0 8px;letter-spacing:-.01em}
-  .lede{color:var(--muted);margin:0 0 28px;max-width:62ch}
-  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
-  .card h3{margin:0 0 6px;font-size:1rem}
-  .card p{margin:0;color:var(--muted);font-size:14px}
-  .quote{background:var(--surface);border-left:3px solid var(--primary);border-radius:0 12px 12px 0;
-         padding:18px 22px;margin:0;color:var(--muted)}
-  .quote strong{color:var(--text)}
-  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
-  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
-  th{color:var(--muted);font-weight:600}
-  .tag{display:inline-block;background:var(--surface2);color:var(--muted);font-size:12px;
-       padding:3px 9px;border-radius:999px;margin-left:6px}
-  footer{padding:40px 0 64px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);text-align:center}
-  footer a{color:var(--muted)}
-  a{color:var(--primary)}
 
-  /* Before and after must ALWAYS render the same size — they are a comparison,
-     and an after frame drawn twice as large flatters it for free. The previous
-     rules gave the after `grid-column:1/-1` between 820 and 1040px, so on a
-     mid-width window it was double the before. One breakpoint, both shots in
-     equal columns, coach beneath. */
-  .demo{display:grid;gap:18px;grid-template-columns:1fr}
-  @media(min-width:760px){
-    .demo{grid-template-columns:1fr 1fr;align-items:start}
-    .demo .shot:first-of-type{order:1}
-    .demo .shot:last-of-type{order:2}
-    .coach{order:3;grid-column:1/-1}
+  * {
+    box-sizing: border-box;
   }
-  .shot{margin:0}
-  /* aspect-ratio pins both frames to the same shape, so a future image with a
-     different aspect cannot quietly make one side of a comparison larger. */
-  .shot img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;
-            display:block;border:1px solid var(--line)}
-  .shot figcaption{display:flex;align-items:baseline;gap:10px;margin-top:10px;font-size:13px}
-  .lbl{background:var(--surface2);color:var(--muted);padding:3px 10px;border-radius:999px;font-weight:600}
-  .lbl.after{background:var(--primary);color:#1a0d07}
-  .ex{color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-  .coach{background:var(--surface);border-left:3px solid var(--primary);border-radius:0 12px 12px 0;
-         margin:0;padding:20px 24px}
-  .coach .who{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-              color:var(--primary);font-weight:700;margin-bottom:10px}
-  .coach p{margin:0 0 10px}
-  .coach p:last-child{margin-bottom:0}
-  .coach .quiet{color:var(--muted);font-size:14px}
 
-  .steps{display:grid;gap:22px;grid-template-columns:1fr}
-  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
-  .step{margin:0}
-  .step img{width:100%;height:auto;border-radius:16px;display:block;
-            border:1px solid var(--line);background:#000}
-  .step figcaption{margin-top:12px;font-size:14px;color:var(--muted);line-height:1.5}
-  .num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;
-       border-radius:50%;background:var(--primary);color:#1a0d07;font-size:12px;font-weight:700;
-       margin-right:6px;vertical-align:1px}
-  .fineprint{color:var(--muted);font-size:13px;margin:20px 0 0;max-width:70ch}
-  h3.case{font-size:1.05rem;margin:44px 0 18px;padding-top:28px;border-top:1px solid var(--line);
-          color:var(--text)}
-  h3.case:first-of-type{margin-top:8px;padding-top:0;border-top:0}
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+
+  .skip-link {
+    position: fixed;
+    z-index: 10;
+    top: 12px;
+    left: 12px;
+    padding: 8px 12px;
+    transform: translateY(-150%);
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .shell {
+    width: min(100%, 1360px);
+    margin: 0 auto;
+    padding-inline: var(--gutter);
+  }
+
+  .masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 76px;
+    padding-block: 24px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .24em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  /* The app icon at its real proportions. The artwork is already a rounded
+     square, so no extra radius is applied on top of it. */
+  .mark img {
+    display: block;
+    width: 26px;
+    height: 26px;
+  }
+
+  .masthead nav {
+    display: flex;
+    gap: clamp(18px, 3vw, 42px);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .masthead nav a {
+    text-decoration-color: transparent;
+    text-underline-offset: 5px;
+  }
+
+  .masthead nav a:hover {
+    color: var(--text);
+    text-decoration-color: var(--primary);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    min-height: min(760px, calc(100svh - 76px));
+    padding-block: clamp(72px, 12vw, 164px) clamp(80px, 10vw, 132px);
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    overflow-wrap: break-word;
+  }
+
+  h1 {
+    grid-column: 1 / span 8;
+    align-self: start;
+    max-width: 8.4ch;
+    margin: 0;
+    font-size: clamp(3.25rem, 9vw, 8.5rem);
+    font-weight: 500;
+    letter-spacing: -.065em;
+    line-height: .91;
+  }
+
+  .hero-copy {
+    grid-column: 9 / -1;
+    align-self: end;
+    max-width: 34ch;
+    padding-bottom: .5rem;
+  }
+
+  .sub {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 1.65vw, 1.35rem);
+    line-height: 1.45;
+  }
+
+  .cta {
+    display: inline-block;
+    margin-top: 32px;
+    border-bottom: 1px solid var(--primary);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-decoration: none;
+  }
+
+  a.cta:hover {
+    color: var(--primary);
+  }
+
+  .note {
+    margin: 12px 0 0;
+    color: var(--dim);
+    font-size: 12px;
+  }
+
+  main > section {
+    padding-block: clamp(76px, 10vw, 140px);
+    border-top: 1px solid var(--line);
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: clamp(44px, 7vw, 88px);
+  }
+
+  h2 {
+    grid-column: 1 / span 3;
+    margin: 0;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+
+  .lede {
+    grid-column: 5 / span 6;
+    max-width: 58ch;
+    margin: -.2em 0 0;
+    color: var(--muted);
+    font-size: clamp(1.15rem, 2vw, 1.7rem);
+    letter-spacing: -.02em;
+    line-height: 1.42;
+  }
+
+  .feature-ledger,
+  .coach-details,
+  .connection-list {
+    margin: 0 0 0 25%;
+    padding: 0;
+    list-style: none;
+  }
+
+  .feature-ledger li,
+  .coach-details li,
+  .connection-list li {
+    display: grid;
+    grid-template-columns: minmax(150px, 1fr) 2fr;
+    gap: clamp(20px, 4vw, 72px);
+    padding-block: 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .feature-ledger li:last-child,
+  .coach-details li:last-child,
+  .connection-list li:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .feature-ledger h3,
+  .coach-details h3,
+  .connection-list h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .feature-ledger p,
+  .coach-details p,
+  .connection-list p {
+    max-width: 48ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .boundary {
+    width: min(83%, 900px);
+    margin: 0 0 clamp(54px, 8vw, 96px) auto;
+    padding-block: clamp(28px, 4vw, 48px);
+    border-block: 1px solid var(--line);
+    color: var(--muted);
+    font-size: clamp(1.45rem, 3.15vw, 2.7rem);
+    letter-spacing: -.035em;
+    line-height: 1.25;
+  }
+
+  .boundary strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .walkthrough {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(16px, 2.3vw, 32px);
+    align-items: start;
+  }
+
+  .step {
+    grid-column: span 4;
+    margin: 0;
+  }
+
+  /* The three captures are the same 332x720, so they sit on a shared baseline
+     with their captions in a row. They were previously staggered vertically,
+     which read as misalignment rather than as rhythm. */
+
+  .step img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    background: #000;
+  }
+
+  .step figcaption {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Setup wireframes: the same Gemini-drawn line art as the in-app tutorial
+     rigs, generated from those as a visual reference so the camera body and the
+     handset are literally the same drawings the app uses. Their own charcoal
+     ground is within a couple of values of --surface, so no padding is needed
+     to hide a seam. */
+  .rig {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2.4vw, 34px);
+    align-items: start;
+  }
+
+  .rig figure {
+    margin: 0;
+  }
+
+  .rig img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .rig figcaption {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .num,
+  .ex {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .num {
+    color: var(--primary);
+    font-size: 12px;
+  }
+
+  .fineprint {
+    max-width: 78ch;
+    margin: clamp(28px, 4vw, 52px) 0 0 auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--dim);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .case + .case {
+    margin-top: clamp(90px, 12vw, 170px);
+  }
+
+  .case-title {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    margin: 0 0 24px;
+  }
+
+  .case-title h3 {
+    grid-column: 1 / span 7;
+    margin: 0;
+    font-size: clamp(1.45rem, 3vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: 1.15;
+  }
+
+  .comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(8px, 1.4vw, 20px);
+  }
+
+  .shot {
+    min-width: 0;
+    margin: 0;
+  }
+
+  /* A fixed shared frame keeps every before/after comparison honest even when
+     the source orientations differ. */
+  .shot img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+
+  .shot figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 14px;
+    align-items: baseline;
+    margin-top: 11px;
+    font-size: 12px;
+  }
+
+  .lbl {
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .lbl.after {
+    color: var(--primary);
+  }
+
+  .ex {
+    color: var(--dim);
+    font-size: 11px;
+  }
+
+  .coach {
+    position: relative;
+    width: min(75%, 820px);
+    margin: clamp(48px, 7vw, 92px) 0 0 auto;
+    padding: 24px 0 0 clamp(24px, 4vw, 52px);
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    line-height: 1.62;
+  }
+
+  .coach::before {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    color: var(--primary);
+    content: "“";
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .coach .who {
+    display: block;
+    margin-bottom: 24px;
+    color: var(--dim);
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .coach p {
+    margin: 0 0 14px;
+  }
+
+  .coach p:last-child {
+    margin-bottom: 0;
+  }
+
+  .coach strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .coach .quiet {
+    margin-top: 22px;
+    color: var(--text);
+    font-size: .9em;
+    font-style: italic;
+  }
+
+  .tag {
+    margin-left: 8px;
+    color: var(--primary);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .beta-layout {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .compatibility {
+    grid-column: 4 / -1;
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 16px 12px 16px 0;
+    border-top: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+  }
+
+  th {
+    color: var(--dim);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  th:first-child,
+  td:first-child {
+    width: 36%;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .key-note {
+    max-width: 62ch;
+    margin: clamp(42px, 6vw, 76px) 0 0;
+    color: var(--muted);
+  }
+
+  .cta-disabled {
+    color: var(--primary);
+  }
+
+  footer {
+    display: grid;
+    grid-template-columns: 1fr minmax(280px, 1fr);
+    gap: 32px;
+    padding-block: 34px 70px;
+    border-top: 1px solid var(--line);
+    color: var(--dim);
+    font-size: 12px;
+  }
+
+  footer p {
+    margin: 0;
+  }
+
+  footer p:last-child {
+    justify-self: end;
+    max-width: 54ch;
+    text-align: right;
+  }
+
+  footer a {
+    color: var(--muted);
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 760px) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .masthead {
+      min-height: 66px;
+      padding-block: 20px 17px;
+    }
+
+    .masthead nav {
+      gap: 18px;
+    }
+
+    .hero {
+      display: block;
+      min-height: 0;
+      padding-block: 72px 88px;
+    }
+
+    h1 {
+      max-width: 8ch;
+    }
+
+    .hero-copy {
+      max-width: 31ch;
+      margin: 64px 0 0 auto;
+    }
+
+    .section-head {
+      display: block;
+      margin-bottom: 42px;
+    }
+
+    h2 {
+      margin-bottom: 22px;
+      color: var(--dim);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .lede {
+      margin: 0;
+    }
+
+    .feature-ledger,
+    .coach-details,
+    .connection-list {
+      margin-left: 0;
+    }
+
+    .feature-ledger li,
+    .coach-details li,
+    .connection-list li {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding-block: 18px;
+    }
+
+    .boundary {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .rig {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+
+    .walkthrough {
+      display: block;
+    }
+
+    .step {
+      width: min(88%, 360px);
+      margin-bottom: 54px;
+    }
+
+    /* Stacked on a phone, the captures share one left edge; the middle one
+       used to be pushed right, which zig-zagged the column. */
+    .step:last-child {
+      margin-bottom: 0;
+    }
+
+    .case-title {
+      display: block;
+    }
+
+    .case-title h3 {
+      max-width: 18ch;
+    }
+
+    .coach {
+      width: 92%;
+    }
+
+    .fineprint {
+      max-width: 100%;
+    }
+
+    .beta-layout {
+      display: block;
+    }
+
+    footer {
+      grid-template-columns: 1fr;
+    }
+
+    footer p:last-child {
+      justify-self: start;
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .comparison {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .masthead nav a:first-child {
+      display: none;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 16vw, 4.1rem);
+    }
+
+    .coach {
+      width: 100%;
+    }
+
+    th,
+    td {
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <header>
-    <div class="mark">Aperi</div>
-    <h1>Your phone is the viewfinder.</h1>
-    <p class="sub">Your Sony camera's live view on your phone — and a coach that
-       tells you why the shot isn't working.</p>
-    <a class="cta" href="#beta">Join the beta →</a>
-    <p class="note">iPhone · TestFlight · free while in beta</p>
+<div class="shell">
+  <header class="masthead">
+    <a class="mark" href="#" aria-label="Aperi home">
+      <img src="img/icon-180.png" alt="" width="26" height="26">Aperi</a>
+    <nav aria-label="Primary">
+      <a href="#demo">Sessions</a>
+      <a href="#how">How it works</a>
+      <a href="#beta">Beta</a>
+    </nav>
   </header>
 
-  <section>
-    <h2>What it does</h2>
-    <p class="lede">Tether the camera and the phone becomes a big, bright
-       viewfinder you can actually work from — mounted on the hot shoe, clamped
-       to a tripod, or in your hand.</p>
-    <div class="grid">
-      <div class="card"><h3>Live view, full size</h3>
-        <p>The camera's feed on your phone, with grids, a live histogram and
-           clipping warnings.</p></div>
-      <div class="card"><h3>Tap to focus</h3>
-        <p>Touch the picture and the camera focuses there. No hunting for the
-           joystick.</p></div>
-      <div class="card"><h3>Exposure by touch</h3>
-        <p>Shutter, aperture, ISO and compensation — step them or open a dial.</p></div>
-      <div class="card"><h3>Browse the card</h3>
-        <p>Every frame on the camera, full screen, pinch to zoom, download as
-           JPEG even from RAW.</p></div>
+  <div class="hero">
+    <h1>Your phone is the viewfinder.</h1>
+    <div class="hero-copy">
+      <p class="sub">Your Sony camera's live view on your phone, plus a coach that
+         tells you why the shot isn't working.</p>
+      <a class="cta" href="#beta">Join the beta →</a>
+      <p class="note">iPhone · TestFlight · free while in beta</p>
     </div>
-  </section>
+  </div>
 
-  <section>
-    <h2>About the coach</h2>
-    <p class="lede">This is the part people ask about, so here it is plainly.</p>
-    <p class="quote"><strong>Aperi never touches your photograph.</strong> It
-       doesn't generate images, retouch them, or edit anything. It reads the frame
-       you're composing and the settings you're using, and tells you what it sees
-       — the way an instructor looking over your shoulder would. The shot stays
-       entirely yours.</p>
-    <div class="grid" style="margin-top:18px">
-      <div class="card"><h3>It knows your settings</h3>
-        <p>Not guessing from pixels — it reads shutter, aperture, ISO and focus
-           mode straight from the camera.</p></div>
-      <div class="card"><h3>It knows your bag</h3>
-        <p>Tell it which lenses you brought and it can suggest switching to one
-           you actually have with you.</p></div>
-      <div class="card"><h3>It speaks</h3>
-        <p>Ask out loud, hear the answer, keep your eye where it belongs.</p></div>
-    </div>
-  </section>
+  <main id="main">
+    <section>
+      <div class="section-head">
+        <h2>What it does</h2>
+        <p class="lede">Tether the camera and the phone becomes a big, bright
+           viewfinder you can actually work from, whether it is mounted on the hot
+           shoe, clamped to a tripod, or held in your hand.</p>
+      </div>
+      <ul class="feature-ledger">
+        <li>
+          <h3>Live view, full size</h3>
+          <p>The camera's feed on your phone, with grids, a live histogram and
+             clipping warnings.</p>
+        </li>
+        <li>
+          <h3>Tap to focus</h3>
+          <p>Touch the picture and the camera focuses there. No hunting for the
+             joystick.</p>
+        </li>
+        <li>
+          <h3>Exposure by touch</h3>
+          <p>Shutter, aperture, ISO and compensation. Step them or open a dial.</p>
+        </li>
+        <li>
+          <h3>Browse the card</h3>
+          <p>Every frame on the camera, full screen, pinch to zoom, download as
+             JPEG even from RAW.</p>
+        </li>
+      </ul>
+    </section>
 
+    <section>
+      <div class="section-head">
+        <h2>About the coach</h2>
+        <p class="lede">This is the part people ask about, so here it is plainly.</p>
+      </div>
+      <p class="boundary"><strong>Aperi never touches your photograph.</strong> It
+         doesn't generate images, retouch them, or edit anything. It reads the frame
+         you're composing and the settings you're using, and tells you what it sees,
+         the way an instructor looking over your shoulder would. The shot stays
+         entirely yours.</p>
+      <ul class="coach-details">
+        <li>
+          <h3>It knows your settings</h3>
+          <p>Not guessing from pixels. It reads shutter, aperture, ISO and focus
+             mode straight from the camera.</p>
+        </li>
+        <li>
+          <h3>It knows your bag</h3>
+          <p>Tell it which lenses you brought and it can suggest switching to one
+             you actually have with you.</p>
+        </li>
+        <li>
+          <h3>It speaks</h3>
+          <p>Ask out loud, hear the answer, keep your eye where it belongs.</p>
+        </li>
+      </ul>
+    </section>
 
-  <section id="how">
-    <h2>How it works</h2>
-    <p class="lede">Three taps, on the phone, while the camera stays on the
-       tripod.</p>
+    <section id="setup">
+      <div class="section-head">
+        <h2>Setting up</h2>
+        <p class="lede">Rig it once and the phone becomes the back of the camera
+           for the rest of the shoot.</p>
+      </div>
 
-    <div class="steps">
-      <figure class="step">
-        <img src="img/app-1-view.jpg" alt="The app showing a waterfall in live view with a grid and histogram" loading="lazy">
-        <figcaption><span class="num">1</span> Your camera's view, on the phone.
-          Grid, live histogram, exposure across the bottom.</figcaption>
-      </figure>
-      <figure class="step">
-        <img src="img/app-2-stage.jpg" alt="The app offering to send the frame to the coach, with options to add a note or speak" loading="lazy">
-        <figcaption><span class="num">2</span> Tap the sparkle. Send the frame as
-          it is, type a question, or just say it out loud.</figcaption>
-      </figure>
-      <figure class="step">
-        <img src="img/app-3-coach.jpg" alt="The coach's reply, with the camera settings recorded beside the question" loading="lazy">
-        <figcaption><span class="num">3</span> The answer, read aloud if you want
-          it. Your settings are stamped on the question, so old threads still
-          make sense.</figcaption>
-      </figure>
-    </div>
+      <div class="rig">
+        <figure>
+          <img src="img/wire-1-mount.jpg" width="1000" height="671" loading="lazy"
+               alt="Line drawing of a camera on a tripod with a phone clamped on the centre column just below it">
+          <figcaption><span class="num">01</span><span>Put the camera on a tripod
+            or a strap, and clamp the phone where you can see it.</span></figcaption>
+        </figure>
 
-    <p class="fineprint">A real exchange, captured on an iPhone. This walkthrough
-       uses the built-in demo camera — which is why the settings on the question
-       are the demo's rather than the photograph's original ones, and also why you
-       can install the app and try all of this before your camera arrives.</p>
-  </section>
+        <figure>
+          <img src="img/wire-2-connect.jpg" width="1000" height="671" loading="lazy"
+               alt="Line drawing of a camera and a phone side by side, joined by a USB-C cable">
+          <figcaption><span class="num">02</span><span>Join them with a USB-C
+            cable, or over Wi-Fi if you would rather not have one.</span></figcaption>
+        </figure>
 
-  <section id="demo">
-    <h2>Two real sessions</h2>
-    <p class="lede">Both of these happened. The coaching quoted is what the app
-       actually replied to the first frame in each pair — written before the
-       second photograph existed, and checkable against the EXIF.</p>
+        <figure>
+          <img src="img/wire-3-shoot.jpg" width="1000" height="671" loading="lazy"
+               alt="Line drawing of the phone showing a waterfall in live view with a focus bracket over it">
+          <figcaption><span class="num">03</span><span>Frame it on the phone, tap
+            where you want focus, and shoot without touching the camera.</span></figcaption>
+        </figure>
+      </div>
+    </section>
 
-    <h3 class="case">Shifen Waterfall — moving water</h3>
+    <section id="how">
+      <div class="section-head">
+        <h2>How it works</h2>
+        <p class="lede">Three taps, on the phone, while the camera stays on the
+           tripod.</p>
+      </div>
 
-    <div class="demo">
-      <figure class="shot">
-        <img src="img/shifen-before.jpg" alt="Shifen Waterfall with the water frozen into messy strands" loading="lazy">
-        <figcaption><span class="lbl">Before</span>
-          <span class="ex">1/50s · f/8 · ISO 100 · 18mm</span></figcaption>
-      </figure>
+      <div class="walkthrough">
+        <figure class="step">
+          <img src="img/app-1-view.jpg" alt="The app showing a waterfall in live view with a grid and histogram" loading="lazy">
+          <figcaption><span class="num">01</span><span>Your camera's view, on the phone.
+            Grid, live histogram, exposure across the bottom.</span></figcaption>
+        </figure>
+        <figure class="step">
+          <img src="img/app-2-stage.jpg" alt="The app offering to send the frame to the coach, with options to add a note or speak" loading="lazy">
+          <figcaption><span class="num">02</span><span>Tap the sparkle. Send the frame as
+            it is, type a question, or just say it out loud.</span></figcaption>
+        </figure>
+        <figure class="step">
+          <img src="img/app-3-coach.jpg" alt="The coach's reply, with the camera settings recorded beside the question" loading="lazy">
+          <figcaption><span class="num">03</span><span>The answer, read aloud if you want
+            it. Your settings are stamped on the question, so old threads still
+            make sense.</span></figcaption>
+        </figure>
+      </div>
 
-      <blockquote class="coach">
-        <span class="who">The coach</span>
-        <p>The main issue is your shutter speed of <strong>1/50</strong>. It is in
-           a no-mans-land for moving water, making the falls look messy rather
-           than intentional.</p>
-        <p>To get that classic, silky water, switch to Manual mode, keep ISO 100,
-           and close down to f/16 to force a longer shutter speed,
-           <strong>aiming for 1/2 or slower</strong>. You will need a tripod.</p>
-        <p class="quiet">You either freeze water completely at 1/1000 or paint
-           with it at 1 second. Let us slow it down.</p>
-      </blockquote>
+      <p class="fineprint">A real exchange, captured on an iPhone. This walkthrough
+         uses the built-in demo camera, which is why the settings on the question
+         are the demo's rather than the photograph's original ones, and also why you
+         can install the app and try all of this before your camera arrives.</p>
+    </section>
 
-      <figure class="shot">
-        <img src="img/shifen-after.jpg" alt="Shifen Waterfall with the water rendered as smooth silk by a long exposure" loading="lazy">
-        <figcaption><span class="lbl after">After</span>
-          <span class="ex">1/2s · f/22 · ISO 100 · 18mm</span></figcaption>
-      </figure>
-    </div>
+    <section id="demo">
+      <div class="section-head">
+        <h2>Two real sessions</h2>
+        <p class="lede">Both of these happened. The coaching quoted is what the app
+           actually replied to the first frame in each pair, written before the
+           second photograph existed and checkable against the EXIF.</p>
+      </div>
 
-    <p class="fineprint">The advice named 1/2 of a second; the next frame was shot
-       at exactly that. Both on the same 18mm prime and ISO 100 — three stops of
-       aperture bought the slower shutter. The framing changed too: APS-C crop mode
-       was switched on and the tripod moved a step closer, so the water is not the
-       only difference you are looking at.</p>
+      <article class="case">
+        <div class="case-title">
+          <h3>Shifen Waterfall: moving water</h3>
+        </div>
 
-    <h3 class="case">Night street, Taiwan — where the colour lives</h3>
+        <div class="comparison">
+          <figure class="shot">
+            <img src="img/shifen-before.jpg" alt="Shifen Waterfall with the water frozen into messy strands" loading="lazy">
+            <figcaption><span class="lbl">Before</span>
+              <span class="ex">1/50s · f/8 · ISO 100 · 18mm</span></figcaption>
+          </figure>
 
-    <div class="demo">
-      <figure class="shot">
-        <img src="img/street-before.jpg" alt="Neon-lit street at night, the signs bright to the point of blowing out" loading="lazy">
-        <figcaption><span class="lbl">Before</span>
-          <span class="ex">A · 1/125s · f/1.8 · ISO 800</span></figcaption>
-      </figure>
+          <figure class="shot">
+            <img src="img/shifen-after.jpg" alt="Shifen Waterfall with the water rendered as smooth silk by a long exposure" loading="lazy">
+            <figcaption><span class="lbl after">After</span>
+              <span class="ex">1/2s · f/22 · ISO 100 · 18mm</span></figcaption>
+          </figure>
+        </div>
 
-      <blockquote class="coach">
-        <span class="who">The coach</span>
-        <p>Your brightest highlights, like those blue and white neon signs, are
-           <strong>completely blown out</strong>.</p>
-        <p>In night street photography, colour lives in the highlights. Because
-           you are in A mode at exposure compensation 0, the camera is trying to
-           make the dark asphalt neutral, which overexposes the signs.</p>
-        <p>Dial your exposure compensation down to <strong>-1.3 EV</strong>. This
-           will protect those rich neon colours and clean up your shadows.</p>
-        <p class="quiet">Let the darkness frame your light.</p>
-      </blockquote>
+        <blockquote class="coach">
+          <cite class="who">The coach</cite>
+          <p>The main issue is your shutter speed of <strong>1/50</strong>. It is in
+             a no-mans-land for moving water, making the falls look messy rather
+             than intentional.</p>
+          <p>To get that classic, silky water, switch to Manual mode, keep ISO 100,
+             and close down to f/16 to force a longer shutter speed,
+             <strong>aiming for 1/2 or slower</strong>. You will need a tripod.</p>
+          <p class="quiet">You either freeze water completely at 1/1000 or paint
+             with it at 1 second. Let us slow it down.</p>
+        </blockquote>
 
-      <figure class="shot">
-        <img src="img/street-after.jpg" alt="The same street exposed a stop darker, the neon signs holding their colour" loading="lazy">
-        <figcaption><span class="lbl after">After</span>
-          <span class="ex">M · 1/60s · f/2.8 · ISO 400</span></figcaption>
-      </figure>
-    </div>
+        <p class="fineprint">The advice named 1/2 of a second; the next frame was shot
+           at exactly that. Both on the same 18mm prime and ISO 100, so three stops of
+           aperture bought the slower shutter. The framing changed too: APS-C crop mode
+           was switched on and the tripod moved a step closer, so the water is not the
+           only difference you are looking at.</p>
+      </article>
 
-    <p class="fineprint">The advice asked for about a stop and a third less
-       exposure; the frames measure <strong>0.99 EV darker</strong>. The camera also
-       moved to Manual, which stopped auto-ISO wandering between 800 and 3200 from
-       one frame to the next, and stopping down to f/2.8 put more of the street in
-       focus. It is meant to be darker — that is where the neon gets its colour
-       back.</p>
-  </section>
+      <article class="case">
+        <div class="case-title">
+          <h3>Night street, Taiwan: where the colour lives</h3>
+        </div>
 
-  <section>
-    <h2>Connecting</h2>
-    <div class="grid">
-      <div class="card"><h3>USB-C <span class="tag">most reliable</span></h3>
-        <p>Set the camera to PC Remote and plug in. It connects on its own.</p></div>
-      <div class="card"><h3>Wi-Fi</h3>
-        <p>Phone and camera on the same network.</p></div>
-      <div class="card"><h3>Wi-Fi Direct</h3>
-        <p>The camera makes its own network. Works anywhere.</p></div>
-    </div>
-  </section>
+        <div class="comparison">
+          <figure class="shot">
+            <img src="img/street-before.jpg" alt="Neon-lit street at night, the signs bright to the point of blowing out" loading="lazy">
+            <figcaption><span class="lbl">Before</span>
+              <span class="ex">A · 1/125s · f/1.8 · ISO 800</span></figcaption>
+          </figure>
 
-  <section id="beta">
-    <h2>Which cameras</h2>
-    <p class="lede">Being straight with you, because nothing is more annoying
-       than installing an app that can't see your camera.</p>
-    <table>
-      <tr><th>Camera</th><th>Status</th></tr>
-      <tr><td>Sony A7 V (ILCE-7M5)</td><td>Supported and tested on real hardware</td></tr>
-      <tr><td>Other recent Sony Alpha bodies</td><td>Not yet — likely close, untested. Tell us which you have.</td></tr>
-    </table>
-    <p class="lede" style="margin-top:24px">The AI coach needs an API key from
-       Google, Anthropic or OpenAI — you bring your own, it stays on your phone,
-       and your photos go straight to the provider you chose. Everything else —
-       live view, focus, exposure, the card browser — works without one.</p>
-    <a class="cta" href="#">TestFlight link coming soon</a>
-    <p class="note">Beta testers with a Sony body other than the A7 V are
-       especially welcome — that's how the list above gets longer.</p>
-  </section>
+          <figure class="shot">
+            <img src="img/street-after.jpg" alt="The same street exposed a stop darker, the neon signs holding their colour" loading="lazy">
+            <figcaption><span class="lbl after">After</span>
+              <span class="ex">M · 1/60s · f/2.8 · ISO 400</span></figcaption>
+          </figure>
+        </div>
+
+        <blockquote class="coach">
+          <cite class="who">The coach</cite>
+          <p>Your brightest highlights, like those blue and white neon signs, are
+             <strong>completely blown out</strong>.</p>
+          <p>In night street photography, colour lives in the highlights. Because
+             you are in A mode at exposure compensation 0, the camera is trying to
+             make the dark asphalt neutral, which overexposes the signs.</p>
+          <p>Dial your exposure compensation down to <strong>-1.3 EV</strong>. This
+             will protect those rich neon colours and clean up your shadows.</p>
+          <p class="quiet">Let the darkness frame your light.</p>
+        </blockquote>
+
+        <p class="fineprint">The advice asked for about a stop and a third less
+           exposure; the frames measure <strong>0.99 EV darker</strong>. The camera also
+           moved to Manual, which stopped auto-ISO wandering between 800 and 3200 from
+           one frame to the next, and stopping down to f/2.8 put more of the street in
+           focus. It is meant to be darker. That is where the neon gets its colour
+           back.</p>
+      </article>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Connecting</h2>
+      </div>
+      <ul class="connection-list">
+        <li>
+          <h3>USB-C <span class="tag">most reliable</span></h3>
+          <p>Set the camera to PC Remote and plug in. It connects on its own.</p>
+        </li>
+        <li>
+          <h3>Wi-Fi</h3>
+          <p>Phone and camera on the same network.</p>
+        </li>
+        <li>
+          <h3>Wi-Fi Direct</h3>
+          <p>The camera makes its own network. Works anywhere.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="beta">
+      <div class="section-head">
+        <h2>Which cameras</h2>
+        <p class="lede">The honest list, because nothing is more annoying than
+           installing an app that turns out not to see your camera.</p>
+      </div>
+      <div class="beta-layout">
+        <div class="compatibility">
+          <table>
+            <thead>
+              <tr><th scope="col">Camera</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sony A7 V (ILCE-7M5)</td><td>Supported and tested on real hardware</td></tr>
+              <tr><td>Other recent Sony Alpha bodies</td><td>Not yet. Likely close, but untested. Tell us which you have.</td></tr>
+            </tbody>
+          </table>
+          <p class="key-note">The AI coach needs an API key from
+             Google, Anthropic or OpenAI. You bring your own, it stays on your phone,
+             and your photos go straight to the provider you chose. Everything else
+             (live view, focus, exposure, the card browser) works without one.</p>
+          <span class="cta cta-disabled" aria-disabled="true">TestFlight link coming soon</span>
+          <p class="note">Beta testers with a Sony body other than the A7 V are
+             especially welcome. That is how the list above gets longer.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> ·
@@ -300,7 +1015,6 @@
     <p>Aperi is not affiliated with, endorsed by, or sponsored by Sony.
        Sony and Alpha are trademarks of Sony Group Corporation.</p>
   </footer>
-
 </div>
 </body>
 </html>
