@@ -18,16 +18,39 @@ ul{padding-left:1.2em}li{margin:.35em 0}
 blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;color:var(--muted)}
 </style></head>
 <body><div class="wrap"><a class="back" href="index.html">&larr; Aperi</a>
-<p class="updated">Last updated 29 July 2026</p>
+<p class="updated">Last updated 31 July 2026</p>
 <h1>Privacy Policy: Aperi</h1>
 <p>Aperi ("the app", "we") helps you control a tethered camera and get AI photography coaching. This policy explains what the app collects, where data goes, and your choices. Plain-language summary first; specifics follow.</p>
+<p>Your photographs are the sensitive thing here, so this policy is unusually specific about where they go.</p>
 <h2>The short version</h2>
 <ul>
-<li>The app has <strong>no accounts and no analytics/tracking SDKs of our own.</strong></li>
+<li>The app has <strong>no accounts and no analytics or tracking SDKs of our own.</strong></li>
 <li>Your <strong>API keys</strong> and <strong>conversation history</strong> stay <strong>on your device</strong>.</li>
-<li>When you ask the coach about a shot, that <strong>photo + camera settings + your message</strong> are sent to <strong>the AI provider you chose</strong> (Google Gemini, Anthropic Claude, or OpenAI) to generate a reply. That's the one time your data leaves the device, and it goes to that provider, not to us.</li>
-<li>If ads are shown (free tier), the <strong>Google Mobile Ads (AdMob)</strong> SDK collects advertising identifiers. Removing ads (one-time purchase) stops ad requests.</li>
+<li>When you ask the coach about a shot, that <strong>photo + camera settings + your message</strong> are sent to <strong>the AI provider you chose</strong> (Google Gemini, Anthropic Claude, or OpenAI) to generate a reply. That is the one time your data leaves the device, and it goes to that provider, not to us.</li>
+<li><strong>Which provider you choose, and which tier, decides what happens to your photographs.</strong> See the section below: this genuinely differs between providers, and a free tier is not the same as a paid one.</li>
+<li>If ads are shown, the <strong>Google Mobile Ads (AdMob)</strong> SDK collects advertising identifiers. Removing ads (one-time purchase) stops ad requests.</li>
 </ul>
+<h2>Read your AI provider's terms. This part is not ours to control.</h2>
+<p>When you bring your own API key, the request goes <strong>from your phone straight to that provider, under your own account</strong>. We are not in the path, we never see the image, and we cannot change what that provider does with it. Their terms govern, not ours.</p>
+<p>That distinction matters more than it might sound, because the providers differ:</p>
+<ul>
+<li><strong>Google Gemini, free tier.</strong> Google states that content submitted on the unpaid tier <strong>is used to provide, improve and develop Google's products, and that human reviewers may read it.</strong> For this app, that content is your photographs. If that is not acceptable to you, do not use a free-tier Gemini key here.</li>
+<li><strong>Google Gemini, paid tier.</strong> Google states that paid-tier prompts and responses are <strong>not</strong> used to train or improve its models.</li>
+<li><strong>OpenAI API.</strong> OpenAI states that API inputs and outputs are <strong>not</strong> used to train its models by default, and are retained for a limited period (published as up to 30 days at the time of writing) for abuse monitoring, then deleted.</li>
+<li><strong>Anthropic API.</strong> Anthropic states that API inputs and outputs are <strong>not</strong> used to train its models by default.</li>
+</ul>
+<p><strong>Verify these against each provider's current terms before you send anything you would mind being read.</strong> They are summarised here in good faith and they change; the provider's own policy is the authority, not this page. Links are in the app next to each provider's key field.</p>
+<h2>Our key will never be used to share your photographs for AI training</h2>
+<p>A managed tier is planned, where coaching runs on <strong>our</strong> API key instead of yours, for people who would rather not obtain one.</p>
+<p>If and when that ships, we commit that:</p>
+<ul>
+<li><strong>We will not enable any data-sharing or model-training option</strong> on the accounts we operate. Our provider's API default is that API data is not used for training, and we will not opt in to anything that changes it.</li>
+<li><strong>We will not sell, share, or license your photographs</strong>, to anyone, for any purpose.</li>
+<li><strong>We will not use your photographs to train models of our own.</strong></li>
+<li>Frames will be <strong>relayed and dropped</strong>. Our metering records counts, costs and outcomes, never image data, never your prompts, never the coach's replies.</li>
+<li>The provider may still retain data briefly for its own abuse monitoring, as described above. That is outside our control and we will not claim otherwise.</li>
+</ul>
+<p>Until the managed tier ships, none of this applies in practice, because we operate no server that receives your photographs at all.</p>
 <h2>What the app stores on your device</h2>
 <ul>
 <li><strong>API keys</strong>: in the platform secure store (Android DataStore / iOS Keychain). Never transmitted anywhere except, as a bearer credential, to the matching AI provider's own API endpoint over HTTPS. Never logged, never sent to us.</li>
@@ -42,26 +65,29 @@ blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;co
 <li>Anthropic Claude API (<code>api.anthropic.com</code>)</li>
 <li>OpenAI API (<code>api.openai.com</code>)</li>
 </ul>
-<p>Each request contains the live-view image, structured camera settings, your typed/spoken text, and recent conversation context. These providers process it under <strong>their</strong> privacy terms and API data-use policies. Review them: Google AI, Anthropic, and OpenAI each publish one. <strong>Note:</strong> free-tier Google Gemini usage may be used by Google to improve its products; paid-tier and the other providers' API traffic is generally excluded from training. Verify against each provider's current terms.</p></li>
-<li><strong>Ads (free tier only)</strong> → Google AdMob, which may collect an advertising ID and device/coarse data to serve and measure ads, per Google's policies. Buying "Remove ads" stops all ad requests. A consent prompt is shown where required (e.g., EEA/UK).</li>
-<li><strong>In-app purchases / subscriptions</strong> → processed by Google Play Billing / Apple App Store. We never see your payment details.</li>
+<p>Each request contains the live-view image, structured camera settings, your typed or spoken text, and recent conversation context. What each provider then does with it is covered in the section above.</p></li>
+<li><strong>Purchases</strong> → <strong>RevenueCat, Inc.</strong>, which validates your receipt with Apple or Google and tells the app what you are entitled to. RevenueCat receives purchase events and an anonymous identifier it generates. It is never given a photograph, a prompt, or an API key. See RevenueCat's own privacy policy. Payment itself is handled by Apple or Google; we never see your card details.</li>
+<li><strong>Voice input</strong> → <strong>Apple</strong>, when you dictate a question. iOS speech recognition may send the audio to Apple for transcription. Type instead of speaking if you would rather it stayed on the device.</li>
+<li><strong>Ads</strong> → Google AdMob, which may collect an advertising ID and device or coarse location data to serve and measure ads, per Google's policies. Buying "Remove ads" stops all ad requests. A consent prompt is shown where required (for example EEA and UK).</li>
 </ol>
-<p>We (the developer) do <strong>not</strong> operate our own servers that receive your photos or messages in the bring-your-own-key mode. <em>(If/when a managed AI tier ships, this policy will be updated to describe the proxy that relays requests using our key and the per-user metering it performs.)</em></p>
+<p><strong>Today, we operate no servers that receive your photographs or messages.</strong> Bring-your-own-key is what ships, and in that mode there is nothing between your phone and the provider you chose.</p>
+<p>If the managed tier described above ships, that changes for the people who use it: their frames would pass through our relay on the way to the provider. It would not change for anyone using their own key. We will say so here before it happens, not after.</p>
 <h2>Microphone, camera connection, network</h2>
 <ul>
-<li><strong>Microphone</strong> is used only while you hold/activate voice input, to transcribe your question via the platform speech recognizer. Audio is not recorded or stored by the app.</li>
+<li><strong>Microphone</strong> is used only while you hold or activate voice input, to transcribe your spoken question. The app does not record the audio or save it anywhere. <strong>Apple's speech recognition may process that audio on Apple's servers</strong> rather than on the device, under Apple's privacy policy, which is how iOS dictation works generally. The audio is your question, not your photograph: images are never part of it.</li>
 <li><strong>USB / Wi-Fi</strong> access is used solely to communicate with your camera.</li>
-<li><strong>Internet</strong> access is used for AI requests, ads (free tier), and purchases.</li>
+<li><strong>Internet</strong> access is used for AI requests, purchases, and ads.</li>
 </ul>
 <h2>Children</h2>
 <p>Not directed to children under 13 (16 in some regions). No knowing collection of children's data.</p>
 <h2>Your choices</h2>
 <ul>
-<li>Choose or remove any AI provider key; without a key, no data is sent to a provider.</li>
+<li>Choose or remove any AI provider key. With no key and no managed subscription, the coach does not run and no photograph is sent anywhere.</li>
+<li>Choose a <strong>paid</strong> provider tier if you do not want your photographs used to improve that provider's products.</li>
 <li>Clear coaching history in-app.</li>
 <li>Remove ads via one-time purchase to stop ad data collection.</li>
 <li>Uninstalling deletes all local app data.</li>
 </ul>
 <h2>Changes &amp; contact</h2>
-<p>We'll update this policy as the app evolves and note the date above. Questions: <a href="mailto:support@aperi.photo">support@aperi.photo</a>.</p>
+<p>We'll update this policy as the app evolves and note the date above. The managed tier described above will be reflected here <strong>before</strong> it ships, not after. Questions: <a href="mailto:support@aperi.photo">support@aperi.photo</a>.</p>
 </div></body></html>
