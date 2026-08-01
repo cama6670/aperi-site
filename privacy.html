@@ -50,6 +50,20 @@ blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;co
 <li>Frames will be <strong>relayed and dropped</strong>. Our metering records counts, costs and outcomes, never image data, never your prompts, never the coach's replies.</li>
 <li>The provider may still retain data briefly for its own abuse monitoring, as described above. That is outside our control and we will not claim otherwise.</li>
 </ul>
+<p><strong>What the relay would keep.</strong> Not your photograph, not your question, not the reply. Those are passed to the provider and dropped. What is written down is the accounting needed to run a metered service:</p>
+<ul>
+<li>a per-user identifier (see below), the time of the request, which AI model answered it, how many tokens it used, what it cost us, how long it took, whether it succeeded, and the size in bytes of the image</li>
+<li>usage rows are deleted after 90 days</li>
+<li>day-by-day totals are kept longer, with <strong>no identifier attached</strong>. They say how many people used the coach, never who</li>
+<li>a suspension record, if we ever have to block an account for abuse, is kept for as long as the block stands</li>
+<li>all of it is stored <strong>in the European Union</strong>, wherever you are. Your photograph still travels to the AI provider in the United States, because that is where the model runs, under the safeguards their data processing terms provide.</li>
+</ul>
+<p><strong>How we would know it is you, without an account.</strong> There are no usernames and no passwords, and we would rather not start now.</p>
+<ul>
+<li>If you subscribe, we use the transaction identifier Apple signs for your purchase. It identifies the subscription, not you: no name, no email.</li>
+<li>On the free tier, we use <strong>App Attest</strong>, an Apple feature that confirms the request came from a genuine, unmodified copy of this app. It gives us a meaningless-looking key that lets us count your four daily prompts. Deleting and reinstalling the app clears it and gives you a fresh one. We considered a mechanism that survives reinstalling and deliberately rejected it, because it would have meant setting an identifier you could not get rid of.</li>
+</ul>
+<p><strong>Erasing it.</strong> A button in the app deletes everything above for you. You will not need to email us or quote an identifier. The one exception is a suspension record, which we keep so that erasing your data cannot lift a ban. If that ever applies to you, the app will say so rather than claiming everything went.</p>
 <p>Until the managed tier ships, none of this applies in practice, because we operate no server that receives your photographs at all.</p>
 <h2>What the app stores on your device</h2>
 <ul>
@@ -84,7 +98,7 @@ blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;co
 <ul>
 <li>Choose or remove any AI provider key. With no key and no managed subscription, the coach does not run and no photograph is sent anywhere.</li>
 <li>Choose a <strong>paid</strong> provider tier if you do not want your photographs used to improve that provider's products.</li>
-<li>Clear coaching history in-app.</li>
+<li>Clear coaching history in-app. If you use the managed tier, the same screen erases what our relay recorded.</li>
 <li>Remove ads via one-time purchase to stop ad data collection.</li>
 <li>Uninstalling deletes all local app data.</li>
 </ul>
