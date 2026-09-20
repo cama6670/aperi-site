@@ -18,7 +18,7 @@ ul{padding-left:1.2em}li{margin:.35em 0}
 blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;color:var(--muted)}
 </style></head>
 <body><div class="wrap"><a class="back" href="index.html">&larr; Aperi</a>
-<p class="updated">Last updated 1 August 2026</p>
+<p class="updated">Last updated 20 September 2026</p>
 <h1>Privacy Policy: Aperi</h1>
 <p>Aperi ("the app", "we") helps you control a tethered camera and get AI photography coaching. This policy explains what the app collects, where data goes, and your choices. Plain-language summary first; specifics follow.</p>
 <p>Your photographs are the sensitive thing here, so this policy is unusually specific about where they go.</p>
@@ -26,7 +26,7 @@ blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;co
 <ul>
 <li>The app has <strong>no accounts and no analytics or tracking SDKs of our own.</strong></li>
 <li>Your <strong>API keys</strong> and <strong>conversation history</strong> stay <strong>on your device</strong>.</li>
-<li>When you ask the coach about a shot, that <strong>photo + camera settings + your message</strong> are sent to <strong>the AI provider you chose</strong> (Google Gemini, Anthropic Claude, or OpenAI) to generate a reply. That is the one time your data leaves the device, and it goes to that provider, not to us.</li>
+<li>When you ask the coach about a shot, that <strong>photo + camera settings + your message</strong> are sent to an AI provider to generate a reply. That is the one time your photograph leaves the device. With <strong>your own key</strong> it goes straight to the provider you chose (Google Gemini, Anthropic Claude, or OpenAI) and never to us. With the <strong>Aperi coach</strong>, the default, it passes through our relay on the way to OpenAI; the relay forwards it and keeps none of it. The app asks for your consent before the first send either way.</li>
 <li><strong>Which provider you choose, and which tier, decides what happens to your photographs.</strong> See the section below: this genuinely differs between providers, and a free tier is not the same as a paid one.</li>
 <li>If ads are shown, the <strong>Google Mobile Ads (AdMob)</strong> SDK collects advertising identifiers. Removing ads (one-time purchase) stops ad requests.</li>
 </ul>
@@ -41,16 +41,15 @@ blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;co
 </ul>
 <p><strong>Verify these against each provider's current terms before you send anything you would mind being read.</strong> They are summarised here in good faith and they change; the provider's own policy is the authority, not this page. Links are in the app next to each provider's key field.</p>
 <h2>Our key will never be used to share your photographs for AI training</h2>
-<p>A managed tier is planned, where coaching runs on <strong>our</strong> API key instead of yours, for people who would rather not obtain one.</p>
-<p>If and when that ships, we commit that:</p>
+<p>The <strong>Aperi coach</strong> runs on <strong>our</strong> API key instead of yours, so the coach works the moment you open the app. It is the default; you can switch to your own key in Settings at any time. On the Aperi coach we commit that:</p>
 <ul>
 <li><strong>We will not enable any data-sharing or model-training option</strong> on the accounts we operate. Our provider's API default is that API data is not used for training, and we will not opt in to anything that changes it.</li>
 <li><strong>We will not sell, share, or license your photographs</strong>, to anyone, for any purpose.</li>
 <li><strong>We will not use your photographs to train models of our own.</strong></li>
-<li>Frames will be <strong>relayed and dropped</strong>. Our metering records counts, costs and outcomes, never image data, never your prompts, never the coach's replies.</li>
+<li>Frames are <strong>relayed and dropped</strong>. Our metering records counts, costs and outcomes, never image data, never your prompts, never the coach's replies.</li>
 <li>The provider may still retain data briefly for its own abuse monitoring, as described above. That is outside our control and we will not claim otherwise.</li>
 </ul>
-<p><strong>What the relay would keep.</strong> Not your photograph, not your question, not the reply. Those are passed to the provider and dropped. What is written down is the accounting needed to run a metered service:</p>
+<p><strong>What the relay keeps.</strong> Not your photograph, not your question, not the reply. Those are passed to the provider and dropped. What is written down is the accounting needed to run a metered service:</p>
 <ul>
 <li>a per-user identifier (see below), the time of the request, which AI model answered it, how many tokens it used, what it cost us, how long it took, whether it succeeded, and the size in bytes of the image</li>
 <li>usage rows are deleted after 90 days</li>
@@ -58,50 +57,55 @@ blockquote{border-left:3px solid var(--primary);margin:1em 0;padding:.4em 1em;co
 <li>a suspension record, if we ever have to block an account for abuse, is kept for as long as the block stands</li>
 <li>all of it is stored <strong>in the European Union</strong>, wherever you are. Your photograph still travels to the AI provider in the United States, because that is where the model runs, under the safeguards their data processing terms provide.</li>
 </ul>
-<p><strong>How we would know it is you, without an account.</strong> There are no usernames and no passwords, and we would rather not start now.</p>
+<p><strong>How we know it is you, without an account.</strong> There are no usernames and no passwords, and we would rather not start now.</p>
 <ul>
-<li>If you subscribe, we use the transaction identifier Apple signs for your purchase. It identifies the subscription, not you: no name, no email.</li>
-<li>On the free tier, we use <strong>App Attest</strong>, an Apple feature that confirms the request came from a genuine, unmodified copy of this app. It gives us a meaningless-looking key that lets us count your four daily prompts. Deleting and reinstalling the app clears it and gives you a fresh one. We considered a mechanism that survives reinstalling and deliberately rejected it, because it would have meant setting an identifier you could not get rid of.</li>
+<li>If you subscribe on iPhone, we use the transaction identifier Apple signs for your purchase. It identifies the subscription, not you: no name, no email. On Android, the app sends your Google Play purchase token to our relay, which verifies it with Google's Play Developer API; the relay stores only a hash of the token, never the token itself.</li>
+<li>On the free tier on iPhone, we use <strong>App Attest</strong>, an Apple feature that confirms the request came from a genuine, unmodified copy of this app. It gives us a meaningless-looking key that lets us count your daily prompts. Deleting and reinstalling the app clears it and gives you a fresh one. We considered a mechanism that survives reinstalling and deliberately rejected it, because it would have meant setting an identifier you could not get rid of.</li>
+<li>On the free tier on Android, we use <strong>Play Integrity</strong>, Google's equivalent. The app sends an integrity token from Google with every free-tier request; to mint it, Google receives the app's package name and the device's integrity state, under Google's privacy policy. The app also generates a random install identifier, kept in encrypted storage on the device and sent to us only once, when it registers. It identifies an install, not a person, and uninstalling the app discards it.</li>
 </ul>
 <p><strong>Erasing it.</strong> A button in the app deletes everything above for you. You will not need to email us or quote an identifier. The one exception is a suspension record, which we keep so that erasing your data cannot lift a ban. If that ever applies to you, the app will say so rather than claiming everything went.</p>
-<p>Until the managed tier ships, none of this applies in practice, because we operate no server that receives your photographs at all.</p>
+<p>If you use your own key instead, none of this applies to you: with your own key we operate nothing in the path between your phone and the provider.</p>
 <h2>What the app stores on your device</h2>
 <ul>
-<li><strong>API keys</strong>: in the platform secure store (Android DataStore / iOS Keychain). Never transmitted anywhere except, as a bearer credential, to the matching AI provider's own API endpoint over HTTPS. Never logged, never sent to us.</li>
+<li><strong>API keys</strong>: in the platform's app-private store (Android DataStore / iOS Keychain). Never transmitted anywhere except, as a bearer credential, to the matching AI provider's own API endpoint over HTTPS. Never logged, never sent to us.</li>
 <li><strong>Coaching history</strong>: your questions, the live-view frames you sent, the camera settings at that moment, and the coach's replies, saved locally so you can revisit them. You can clear this at any time in the app; uninstalling removes it.</li>
 <li><strong>Preferences</strong>: chosen AI provider/model, connection mode, camera IP, toggles. Local only.</li>
+<li><strong>Camera Wi-Fi credentials</strong>: if you connect over Wi-Fi, the camera's access-authentication password is stored on the device and used only to open an encrypted connection to the camera on your local network. It is never sent to us.</li>
+<li><strong>The last shot</strong>: the most recent photograph the camera handed the app is kept on the device so the coach can be asked about it after a relaunch, and, on iPhone, so the Apple Watch app can show it.</li>
 </ul>
 <h2>What is sent off the device, and to whom</h2>
 <ol>
-<li><strong>AI coaching requests</strong> → the provider you select in Settings:
+<li><strong>AI coaching requests</strong>, with your own key → the provider you select in Settings:
 <ul>
 <li>Google Gemini API (<code>generativelanguage.googleapis.com</code>)</li>
 <li>Anthropic Claude API (<code>api.anthropic.com</code>)</li>
 <li>OpenAI API (<code>api.openai.com</code>)</li>
 </ul>
-<p>Each request contains the live-view image, structured camera settings, your typed or spoken text, and recent conversation context. What each provider then does with it is covered in the section above.</p></li>
-<li><strong>Purchases</strong> → <strong>RevenueCat, Inc.</strong>, which validates your receipt with Apple or Google and tells the app what you are entitled to. RevenueCat receives purchase events and an anonymous identifier it generates. It is never given a photograph, a prompt, or an API key. See RevenueCat's own privacy policy. Payment itself is handled by Apple or Google; we never see your card details.</li>
-<li><strong>Voice input</strong> → <strong>Apple</strong>, when you dictate a question. iOS speech recognition may send the audio to Apple for transcription. Type instead of speaking if you would rather it stayed on the device.</li>
-<li><strong>Ads</strong> → Google AdMob, which may collect an advertising ID and device or coarse location data to serve and measure ads, per Google's policies. Buying "Remove ads" stops all ad requests. A consent prompt is shown where required (for example EEA and UK).</li>
+<p>Each request contains the live-view image or the last shot, structured camera settings, your typed or spoken text, and recent conversation context. What each provider then does with it is covered in the section above.</p></li>
+<li><strong>AI coaching requests, with the Aperi coach</strong> → our relay (<code>proxy.aperi.photo</code>, run on Cloudflare) and on to the OpenAI API. The relay forwards the same content and keeps the accounting described in the section above, in the European Union. It never stores the image, your text, or the reply.</li>
+<li><strong>Purchases</strong> → on iPhone, <strong>RevenueCat, Inc.</strong>, which validates your receipt with Apple and tells the app what you are entitled to. RevenueCat receives purchase events and an anonymous identifier it generates. It is never given a photograph, a prompt, or an API key. See RevenueCat's own privacy policy. On Android, Google Play Billing, and, for a coach subscription, the purchase token to our relay as described above. Payment itself is handled by Apple or Google; we never see your card details.</li>
+<li><strong>Voice input</strong> → the platform's speech recognizer, when you dictate a question: <strong>Apple</strong> on iPhone and Apple Watch, <strong>Google</strong> on Android. Either may send the audio to the platform's servers for transcription, or transcribe it on the device, depending on the device and its settings. The audio is your question, never your photograph. Type instead of speaking if you would rather it stayed on the device.</li>
+<li><strong>Ads</strong> → Google AdMob, which may collect an advertising ID and device or coarse location data to serve and measure ads, per Google's policies. Buying "Remove ads" stops all ad requests and that use of the advertising ID. A consent prompt is shown where required (for example EEA and UK).</li>
+<li><strong>Apple Watch</strong> (iPhone only) → your own watch. The last shot, your question and the coach's reply travel between the phone and the paired watch over Apple's device-to-device link, not through us.</li>
 </ol>
-<p><strong>Today, we operate no servers that receive your photographs or messages.</strong> Bring-your-own-key is what ships, and in that mode there is nothing between your phone and the provider you chose.</p>
-<p>If the managed tier described above ships, that changes for the people who use it: their frames would pass through our relay on the way to the provider. It would not change for anyone using their own key. We will say so here before it happens, not after.</p>
+<p><strong>With your own key, we operate nothing that receives your photographs or messages.</strong> With the Aperi coach, the relay described above is the one thing of ours in the path, and what it keeps is listed there.</p>
 <h2>Microphone, camera connection, network</h2>
 <ul>
-<li><strong>Microphone</strong> is used only while you hold or activate voice input, to transcribe your spoken question. The app does not record the audio or save it anywhere. <strong>Apple's speech recognition may process that audio on Apple's servers</strong> rather than on the device, under Apple's privacy policy, which is how iOS dictation works generally. The audio is your question, not your photograph: images are never part of it.</li>
-<li><strong>USB / Wi-Fi</strong> access is used solely to communicate with your camera.</li>
+<li><strong>Microphone</strong> is used only while you hold or activate voice input, to transcribe your spoken question. The app does not record the audio or save it anywhere. The platform's speech recognition may process that audio on Apple's or Google's servers rather than on the device, under their privacy policies, which is how dictation works generally. The audio is your question, not your photograph: images are never part of it.</li>
+<li><strong>Hands-free coaching</strong>, when you turn it on, keeps the app running with the screen off so an earbud press can reach it: a background audio session on iPhone, a foreground service on Android. The microphone is used in that mode only for the question you dictate after a press, as above.</li>
+<li><strong>USB / Wi-Fi</strong> access is used solely to communicate with your camera. Over Wi-Fi the app opens an encrypted connection to the camera on your local network; nothing about that connection is sent to us.</li>
 <li><strong>Internet</strong> access is used for AI requests, purchases, and ads.</li>
 </ul>
 <h2>Children</h2>
 <p>Not directed to children under 13 (16 in some regions). No knowing collection of children's data.</p>
 <h2>Your choices</h2>
 <ul>
-<li>Choose or remove any AI provider key. With no key and no managed subscription, the coach does not run and no photograph is sent anywhere.</li>
+<li>Choose your own key or the Aperi coach, and change your mind at any time. The coach never sends a photograph until you ask it to, and asks for your consent before the first send to each destination.</li>
 <li>Choose a <strong>paid</strong> provider tier if you do not want your photographs used to improve that provider's products.</li>
-<li>Clear coaching history in-app. If you use the managed tier, the same screen erases what our relay recorded.</li>
+<li>Clear coaching history in-app. If you use the Aperi coach, the same screen erases what our relay recorded, for both your free-tier and subscription identities.</li>
 <li>Remove ads via one-time purchase to stop ad data collection.</li>
 <li>Uninstalling deletes all local app data.</li>
 </ul>
 <h2>Changes &amp; contact</h2>
-<p>We'll update this policy as the app evolves and note the date above. The managed tier described above will be reflected here <strong>before</strong> it ships, not after. Questions: <a href="mailto:support@aperi.photo">support@aperi.photo</a>.</p>
+<p>We'll update this policy as the app evolves and note the date above. Questions: <a href="mailto:support@aperi.photo">support@aperi.photo</a>.</p>
 </div></body></html>
