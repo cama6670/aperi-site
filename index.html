@@ -18,6 +18,8 @@
 <meta name="twitter:title" content="Aperi: your phone is the viewfinder">
 <meta name="twitter:description" content="Live view from your Sony, and a coach that tells you why the shot isn't working.">
 <meta name="twitter:image" content="https://aperi.photo/img/share.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Aperi","legalName":"RecompFit LLC","url":"https://aperi.photo/","logo":"https://aperi.photo/img/icon-180.png","email":"support@aperi.photo","founder":{"@type":"Person","name":"Max Camacho","jobTitle":"Founder and developer"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Aperi","applicationCategory":"Photography","operatingSystem":"iOS, Android","url":"https://aperi.photo/","description":"Aperi puts your Sony camera's live view on your phone, lets you tap to focus, and coaches you on exposure and composition while you shoot.","offers":[{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Camera control: live view, tap to focus, remote shutter, exposure, histogram, card browser. Free, no account."},{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Beta: 10 free coach replies every 24 hours on Aperi's key; unlimited on your own Google, Anthropic or OpenAI key."}],"author":{"@type":"Organization","name":"Aperi"}}</script>
 <link rel="canonical" href="https://aperi.photo/">
 <meta name="theme-color" content="#101418">
 <link rel="icon" href="favicon.png" type="image/png">
@@ -834,6 +836,79 @@
       scroll-behavior: auto;
     }
   }
+
+  /* Why not ChatGPT */
+  .why-not {
+    max-width: 60ch;
+    margin-top: 40px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .why-not h3 { margin-bottom: 12px; font-size: 1.125rem; letter-spacing: -.02em; }
+  .why-not p { color: var(--muted); }
+
+  /* Pricing */
+  .price-grid { display: grid; gap: 16px; }
+  .price-card {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--surface);
+  }
+  .price-card.featured { border-color: var(--primary); }
+  .price-card h3 { font-size: 1.125rem; letter-spacing: -.02em; }
+  .price { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; letter-spacing: -.03em; }
+  .price span { color: var(--muted); font-size: 1rem; font-weight: 400; letter-spacing: 0; }
+  .saving { color: var(--primary); font-size: .875rem; font-weight: 600; }
+  .badge {
+    position: absolute; top: -12px; left: 24px;
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--primary); color: #101418;
+    font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  }
+  .price-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .9375rem; display: grid; gap: 6px; }
+  .price-note { color: var(--dim); font-size: .875rem; }
+  .price-note a { color: var(--muted); }
+
+  /* FAQ */
+  .faq { display: grid; border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    cursor: pointer; padding: 18px 0; font-size: 1.0625rem; font-weight: 500; letter-spacing: -.01em;
+    list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; float: right; color: var(--primary); }
+  .faq details[open] summary::after { content: "–"; }
+  .faq details p { max-width: 64ch; margin: 0 0 20px; color: var(--muted); }
+
+  /* Beta additions */
+  .free-forever { max-width: 60ch; margin-top: 20px; color: var(--text); }
+  .free-forever a { color: var(--primary); }
+  .joined { margin-top: 10px; color: var(--muted); font-size: .9375rem; }
+
+  /* Third-party signals strip (hidden until the first lands) */
+  .signals { margin-bottom: 28px; }
+  .signal-slots { display: flex; gap: 16px; flex-wrap: wrap; }
+  .signal { padding: 8px 14px; border: 1px dashed var(--line); border-radius: 10px; color: var(--dim); font-size: .875rem; }
+
+  @media (min-width: 720px) {
+    .price-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .price-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* Testimonial wall (hidden until filled) */
+  .quotes { display: grid; gap: 16px; }
+  .quote { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+  .quote blockquote { margin: 0 0 12px; color: var(--text); font-size: 1.0625rem; }
+  .quote .who { color: var(--dim); font-size: .875rem; }
+  @media (min-width: 900px) { .quotes { grid-template-columns: repeat(3, 1fr); } }
 </style>
 </head>
 <body>
@@ -850,7 +925,9 @@
       <a href="#ways">Ways to use it</a>
       <a href="#coach">The coach</a>
       <a href="#cameras">Cameras</a>
+      <a href="#pricing">Pricing</a>
       <a href="byok.html">BYOK</a>
+      <a href="about.html">About</a>
       <a href="#beta">Beta</a>
     </nav>
   </div>
@@ -875,7 +952,7 @@
     </div>
     <div class="hero-visual">
       <div class="device phone">
-        <img src="img/shot-liveview-coach.jpg" width="736" height="1600"
+        <img src="img/shot-liveview-coach.jpg" srcset="img/shot-liveview-coach-368w.jpg 368w, img/shot-liveview-coach.jpg 736w" sizes="(min-width: 900px) 360px, 72vw" width="736" height="1600"
           alt="Shifen Waterfall in Aperi's live view, with exposure controls and the coach's reply about the photograph beneath"
           decoding="async" fetchpriority="high">
       </div>
@@ -981,7 +1058,7 @@
 
       <figure class="screen">
         <div class="device phone">
-          <img src="img/shot-liveview-coach.jpg" width="736" height="1600"
+          <img src="img/shot-liveview-coach.jpg" srcset="img/shot-liveview-coach-368w.jpg 368w, img/shot-liveview-coach.jpg 736w" sizes="(min-width: 900px) 360px, 72vw" width="736" height="1600"
             alt="Shifen Waterfall in Aperi's live view, with the coach's reply below the shutter and exposure chips"
             loading="lazy" decoding="async">
         </div>
@@ -991,7 +1068,7 @@
 
     <figure class="wide-screen">
       <div class="device landscape">
-        <img src="img/shot-landscape.jpg" width="1600" height="738"
+        <img src="img/shot-landscape.jpg" srcset="img/shot-landscape-800w.jpg 800w, img/shot-landscape.jpg 1600w" sizes="(min-width: 1100px) 1040px, 100vw" width="1600" height="738"
           alt="Aperi in landscape, with a Taiwan night street photograph on the left and shutter, exposure, conversation and question controls on the right"
           loading="lazy" decoding="async">
       </div>
@@ -1015,7 +1092,7 @@
 
     <div class="rig">
       <figure>
-        <img src="img/wire-3-shoot.jpg" width="1000" height="671"
+        <img src="img/wire-3-shoot.jpg" srcset="img/wire-3-shoot-500w.jpg 500w, img/wire-3-shoot.jpg 1000w" sizes="(min-width: 900px) 23vw, 100vw" width="1000" height="671"
           alt="Line drawing of a phone in hand, framing a waterfall while the camera sits on a tripod"
           loading="lazy" decoding="async">
         <figcaption><span class="num">01</span><span>Phone in hand: frame, focus and
@@ -1024,7 +1101,7 @@
       </figure>
 
       <figure>
-        <img src="img/wire-5-airpods.jpg" width="1000" height="671"
+        <img src="img/wire-5-airpods.jpg" srcset="img/wire-5-airpods-500w.jpg 500w, img/wire-5-airpods.jpg 1000w" sizes="(min-width: 900px) 23vw, 100vw" width="1000" height="671"
           alt="Line drawing of a photographer with AirPods in, camera to the eye and phone in a pocket"
           loading="lazy" decoding="async">
         <figcaption><span class="num">02</span><span>Phone in a pocket, earbuds in:
@@ -1033,7 +1110,7 @@
       </figure>
 
       <figure>
-        <img src="img/wire-6-watch.jpg" width="1000" height="671"
+        <img src="img/wire-6-watch.jpg" srcset="img/wire-6-watch-500w.jpg 500w, img/wire-6-watch.jpg 1000w" sizes="(min-width: 900px) 23vw, 100vw" width="1000" height="671"
           alt="Line drawing of an Apple Watch showing a shot with a focus bracket and an orange button"
           loading="lazy" decoding="async">
         <figcaption><span class="num">03</span><span>On the wrist (iPhone): every shot appears
@@ -1042,7 +1119,7 @@
       </figure>
 
       <figure>
-        <img src="img/wire-4-wifi.jpg" width="1000" height="671"
+        <img src="img/wire-4-wifi.jpg" srcset="img/wire-4-wifi-500w.jpg 500w, img/wire-4-wifi.jpg 1000w" sizes="(min-width: 900px) 23vw, 100vw" width="1000" height="671"
           alt="Line drawing of a camera and phone joined by a wireless signal, with no cable"
           loading="lazy" decoding="async">
         <figcaption><span class="num">04</span><span>No cable at all: use the camera's
@@ -1064,6 +1141,17 @@
       you're composing and the settings you're using, and tells you what it sees,
       the way an instructor looking over your shoulder would. The shot stays
       entirely yours.</p>
+
+    <div class="why-not">
+      <h3>Why not just ask ChatGPT?</h3>
+      <p>You can, after the fact: export the photo, upload it, type in what you
+        shot it at. Aperi is on the camera while you shoot. It reads shutter,
+        aperture, ISO and focus mode straight from the body, so it never guesses
+        the exposure from pixels. It answers in seconds about the frame in front
+        of you, not the one from last week. And with earbuds in or the watch on,
+        you never take your eye off the scene. A chatbot is a fair critic of a
+        finished picture. This is a coach for the next one.</p>
+    </div>
     <ul class="coach-details">
       <li>
         <h3>It knows your settings</h3>
@@ -1095,14 +1183,14 @@
 
       <div class="comparison">
         <figure class="shot">
-          <img src="img/shifen-before.jpg" alt="Shifen Waterfall with the water frozen into messy strands"
+          <img src="img/shifen-before.jpg" srcset="img/shifen-before-600w.jpg 600w, img/shifen-before.jpg 1200w" sizes="(min-width: 720px) 48vw, 100vw" alt="Shifen Waterfall with the water frozen into messy strands"
             width="1200" height="800" loading="lazy" decoding="async">
           <figcaption><span class="lbl">Before</span>
             <span class="ex">1/50s · f/8 · ISO 100 · 18mm</span></figcaption>
         </figure>
 
         <figure class="shot">
-          <img src="img/shifen-after.jpg" alt="Shifen Waterfall with the water rendered as smooth silk by a long exposure"
+          <img src="img/shifen-after.jpg" srcset="img/shifen-after-600w.jpg 600w, img/shifen-after.jpg 1200w" sizes="(min-width: 720px) 48vw, 100vw" alt="Shifen Waterfall with the water rendered as smooth silk by a long exposure"
             width="1200" height="800" loading="lazy" decoding="async">
           <figcaption><span class="lbl after">After</span>
             <span class="ex">1/2s · f/22 · ISO 100 · 18mm</span></figcaption>
@@ -1135,14 +1223,14 @@
 
       <div class="comparison">
         <figure class="shot">
-          <img src="img/street-before.jpg" alt="Neon-lit street at night, the signs bright to the point of blowing out"
+          <img src="img/street-before.jpg" srcset="img/street-before-600w.jpg 600w, img/street-before.jpg 1200w" sizes="(min-width: 720px) 48vw, 100vw" alt="Neon-lit street at night, the signs bright to the point of blowing out"
             width="1200" height="800" loading="lazy" decoding="async">
           <figcaption><span class="lbl">Before</span>
             <span class="ex">A · 1/125s · f/1.8 · ISO 800</span></figcaption>
         </figure>
 
         <figure class="shot">
-          <img src="img/street-after.jpg" alt="The same street exposed a stop darker, the neon signs holding their colour"
+          <img src="img/street-after.jpg" srcset="img/street-after-600w.jpg 600w, img/street-after.jpg 1200w" sizes="(min-width: 720px) 48vw, 100vw" alt="The same street exposed a stop darker, the neon signs holding their colour"
             width="1200" height="800" loading="lazy" decoding="async">
           <figcaption><span class="lbl after">After</span>
             <span class="ex">M · 1/60s · f/2.8 · ISO 400</span></figcaption>
@@ -1168,6 +1256,25 @@
          focus. It is meant to be darker. That is where the neon gets its colour
          back.</p>
     </article>
+  </section>
+
+  <!-- Tester testimonials (D3.2). Hidden until the first quotes are in hand.
+       Ask early testers for one line with first name, camera body, and an
+       outcome ("the coach caught my blown highlights before I left"), plus a
+       photo with permission. Fill the three articles, remove `hidden`. -->
+  <section id="testers" class="section" aria-labelledby="testers-title" hidden>
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">From the beta</span>
+        <h2 id="testers-title">What testers say</h2>
+      </div>
+      <p class="lede">Real names, real bodies, one outcome each.</p>
+    </div>
+    <div class="quotes">
+      <article class="quote"><blockquote><p>Quote</p></blockquote><p class="who">Name · camera body</p></article>
+      <article class="quote"><blockquote><p>Quote</p></blockquote><p class="who">Name · camera body</p></article>
+      <article class="quote"><blockquote><p>Quote</p></blockquote><p class="who">Name · camera body</p></article>
+    </div>
   </section>
 
   <section id="cameras" class="section" aria-labelledby="cameras-title">
@@ -1206,20 +1313,134 @@
     </ul>
   </section>
 
+  <section id="pricing" class="section" aria-labelledby="pricing-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">06 / What it costs</span>
+        <h2 id="pricing-title">Pricing</h2>
+      </div>
+      <p class="lede">The beta is free. This is the plan for after it, so nobody
+        joins without knowing what comes next.</p>
+    </div>
+
+    <div class="price-grid">
+      <article class="price-card">
+        <h3>Camera control</h3>
+        <p class="price">Free<span> forever</span></p>
+        <ul>
+          <li>Live view, tap to focus, remote shutter</li>
+          <li>Shutter, aperture, ISO and EV from the phone</li>
+          <li>Histogram, grids, highlight clipping</li>
+          <li>Card browser</li>
+          <li>No account, no key, no subscription</li>
+        </ul>
+        <p class="price-note">A small banner sits on the settings and chat sheets,
+          never over the picture. $4.99 once removes it.</p>
+      </article>
+
+      <article class="price-card featured">
+        <p class="badge">Most popular</p>
+        <h3>Aperi coach, yearly</h3>
+        <p class="price">$39.99<span> / year</span></p>
+        <p class="saving">Save 33% against monthly</p>
+        <ul>
+          <li>300 coach replies a month on our key</li>
+          <li>No API key, no account</li>
+          <li>Spoken replies, hands-free, the watch</li>
+          <li>Removes the banner</li>
+        </ul>
+        <p class="price-note">During the beta: 10 replies every 24 hours, free.</p>
+      </article>
+
+      <article class="price-card">
+        <h3>Aperi coach, monthly</h3>
+        <p class="price">$4.99<span> / month</span></p>
+        <ul>
+          <li>The same 300 replies a month</li>
+          <li>Cancel any time</li>
+        </ul>
+        <p class="price-note">Works out to $59.88 a year.</p>
+      </article>
+
+      <article class="price-card">
+        <h3>Bring your own key</h3>
+        <p class="price">Free<span> and unlimited</span></p>
+        <ul>
+          <li>Your Google, Anthropic or OpenAI key</li>
+          <li>You pay the provider at its rates; we never see the key</li>
+          <li>Photos go straight to the provider you chose</li>
+        </ul>
+        <p class="price-note"><a href="byok.html">What each provider does with your
+          photographs →</a></p>
+      </article>
+    </div>
+    <p class="fineprint">These are the prices we intend to charge when the beta
+      ends. They are not live in either store yet, and nobody is charged today.
+      Prices in US dollars; store taxes may apply.</p>
+  </section>
+
+  <section id="faq" class="section" aria-labelledby="faq-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">07 / Questions</span>
+        <h2 id="faq-title">Questions people ask</h2>
+      </div>
+      <p class="lede">The short answers. The long ones are in the sections above.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Does it work with my Sony camera?</summary>
+        <p>The A7 V is tested on real hardware before every release, over USB-C and Wi-Fi. The A7 IV, A7R V, A7C II, A1 II, A9 III, A6700 and ZV-E1 share the same protocol generation and should work, but we have not had one in hand. If you own one of those, you are exactly the tester we want.</p>
+      </details>
+      <details>
+        <summary>How fast is the coaching?</summary>
+        <p>Measured, not estimated: 0.9–1.5 seconds from a wrist press to the picture on the watch; 2.5 seconds on the best run from an earbud double-press to the first spoken word, 3.3–4.2 seconds typically; 4.2 seconds from a tap in the app over USB-C. Your network and lens move those numbers.</p>
+      </details>
+      <details>
+        <summary>Do I need an API key?</summary>
+        <p>No. The coach works the moment you open the app on Aperi&#x27;s own key. If you would rather use your own key from Google, Anthropic or OpenAI, you can, and it stays on your phone.</p>
+      </details>
+      <details>
+        <summary>Is it really free?</summary>
+        <p>Every camera feature is free forever: live view, tap to focus, the remote shutter, exposure, the histogram and grids, the card browser. During the beta the coach is free too: 10 replies every 24 hours on our key, or unlimited on your own key.</p>
+      </details>
+      <details>
+        <summary>What happens after the beta?</summary>
+        <p>Camera control stays free. The coach becomes a subscription, $4.99 a month or $39.99 a year for 300 replies a month, and a $4.99 one-time purchase removes the banner. Your own key stays free and unlimited. Testers move to the store version when it ships; nothing is lost.</p>
+      </details>
+      <details>
+        <summary>Does it work without internet?</summary>
+        <p>The camera side does: USB-C and the camera&#x27;s own Wi-Fi Direct need no internet at all. The coach does need a connection, because the frame goes to the AI provider either way.</p>
+      </details>
+      <details>
+        <summary>What about Canon and Nikon?</summary>
+        <p>Coming, no date yet. Canon uses its own PTP extensions, so it is real work rather than a switch to flip; Nikon follows Canon.</p>
+      </details>
+      <details>
+        <summary>Can I try it without a camera?</summary>
+        <p>Yes. The app opens on a built-in demo camera, marked with a green DEMO badge, and everything except the physical link works exactly as it does with real hardware, coach included.</p>
+      </details>
+    </div>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work with my Sony camera?","acceptedAnswer":{"@type":"Answer","text":"The A7 V is tested on real hardware before every release, over USB-C and Wi-Fi. The A7 IV, A7R V, A7C II, A1 II, A9 III, A6700 and ZV-E1 share the same protocol generation and should work, but we have not had one in hand. If you own one of those, you are exactly the tester we want."}},{"@type":"Question","name":"How fast is the coaching?","acceptedAnswer":{"@type":"Answer","text":"Measured, not estimated: 0.9–1.5 seconds from a wrist press to the picture on the watch; 2.5 seconds on the best run from an earbud double-press to the first spoken word, 3.3–4.2 seconds typically; 4.2 seconds from a tap in the app over USB-C. Your network and lens move those numbers."}},{"@type":"Question","name":"Do I need an API key?","acceptedAnswer":{"@type":"Answer","text":"No. The coach works the moment you open the app on Aperi's own key. If you would rather use your own key from Google, Anthropic or OpenAI, you can, and it stays on your phone."}},{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"Every camera feature is free forever: live view, tap to focus, the remote shutter, exposure, the histogram and grids, the card browser. During the beta the coach is free too: 10 replies every 24 hours on our key, or unlimited on your own key."}},{"@type":"Question","name":"What happens after the beta?","acceptedAnswer":{"@type":"Answer","text":"Camera control stays free. The coach becomes a subscription, $4.99 a month or $39.99 a year for 300 replies a month, and a $4.99 one-time purchase removes the banner. Your own key stays free and unlimited. Testers move to the store version when it ships; nothing is lost."}},{"@type":"Question","name":"Does it work without internet?","acceptedAnswer":{"@type":"Answer","text":"The camera side does: USB-C and the camera's own Wi-Fi Direct need no internet at all. The coach does need a connection, because the frame goes to the AI provider either way."}},{"@type":"Question","name":"What about Canon and Nikon?","acceptedAnswer":{"@type":"Answer","text":"Coming, no date yet. Canon uses its own PTP extensions, so it is real work rather than a switch to flip; Nikon follows Canon."}},{"@type":"Question","name":"Can I try it without a camera?","acceptedAnswer":{"@type":"Answer","text":"Yes. The app opens on a built-in demo camera, marked with a green DEMO badge, and everything except the physical link works exactly as it does with real hardware, coach included."}}]}</script>
+  </section>
+
   <section id="beta" class="section" aria-labelledby="beta-title">
     <div class="beta-panel">
       <div>
-        <p class="eyebrow">06 / Come shoot with us</p>
+        <p class="eyebrow">08 / Come shoot with us</p>
         <h2 id="beta-title">Beta</h2>
       </div>
       <div>
         <p class="key-note">The coach works the moment you open the app — no API
-          key, no account. A few free messages a day are on us. If you would
+          key, no account. 10 free coach replies every 24 hours, on us. If you would
           rather use your own key from Google, Anthropic or OpenAI, you can:
           it stays on your phone, your photos go straight to the provider you
           chose, and it is free and unlimited. Everything else — live view,
           focus, exposure, the card browser — never needed either.
           <a href="byok.html">What each provider does with your photographs →</a></p>
+        <p class="free-forever">Every camera feature — live view, focus, exposure,
+          the card browser — is free forever, no account, no key. Only the coach
+          has a paid tier, and <a href="#pricing">the prices are on this page</a>.</p>
         <div class="beta-links">
           <a class="cta" href="https://testflight.apple.com/join/GAdKfhEf"
             rel="noopener">Join the iPhone beta →</a>
@@ -1227,6 +1448,11 @@
             rel="noopener">Join the Android beta →</a>
         </div>
         <p class="note">TestFlight and Google Play · free while in beta</p>
+        <!-- Quantity proof. Update the count by hand from App Store Connect
+             (TestFlight testers) and Play Console (open-testing opt-ins); the
+             date must move with it. -->
+        <p class="joined">Joined so far: 20 iPhone testers, counted 21 September 2026.
+          The Android count follows once the Play track is serving installs.</p>
         <p class="welcome">Testers with a Sony body other than the A7 V are especially welcome.</p>
       </div>
     </div>
@@ -1235,7 +1461,19 @@
 
 <div class="shell">
   <footer>
+    <!-- Third-party signals. Empty on purpose until the first one lands:
+         a Product Hunt badge IMAGE (this site loads no scripts) in the first
+         slot, press logos or a dated quote in the second. Remove the hidden
+         attribute to show the strip. -->
+    <div class="signals" hidden>
+      <p class="eyebrow">As seen in</p>
+      <div class="signal-slots">
+        <a class="signal" href="#" rel="noopener">Product Hunt</a>
+        <span class="signal">Press</span>
+      </div>
+    </div>
     <nav aria-label="Legal and contact">
+      <a href="about.html">About</a><span aria-hidden="true">·</span>
       <a href="privacy.html">Privacy</a><span aria-hidden="true">·</span>
       <a href="terms.html">Terms</a><span aria-hidden="true">·</span>
       <a href="mailto:support@aperi.photo">Contact</a>

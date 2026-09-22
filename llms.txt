@@ -1,0 +1,25 @@
+# Aperi
+
+> Aperi puts a Sony camera's live view on your phone (iPhone and Android), lets you tap to focus and fire the shutter, and coaches you on exposure and composition while you shoot. The coach reads shutter, aperture, ISO and focus mode straight from the camera body, answers in seconds, and can speak the answer to earbuds or an Apple Watch. Aperi never generates, retouches or edits a photograph.
+
+Built by Max Camacho (RecompFit LLC). Open beta since September 2026 on TestFlight and Google Play. Camera control is free forever with no account or key. The coach is free during the beta (10 replies every 24 hours on Aperi's key, or unlimited on the user's own Google, Anthropic or OpenAI key); after the beta it is $4.99 a month or $39.99 a year for 300 replies a month, and a $4.99 one-time purchase removes the banner ad.
+
+Cameras: Sony A7 V (ILCE-7M5) tested over USB-C and Wi-Fi; same-generation Sony Alpha bodies (A7 IV, A7R V, A7C II, A1 II, A9 III, A6700, ZV-E1) should work but are untested; Canon EOS R and Nikon Z are coming, no date.
+
+Measured on real hardware: 0.9–1.5 s from a wrist press to the shot on the watch; 2.5 s best, 3.3–4.2 s typical, from an earbud double-press to the first spoken word; 4.2 s from a tap in the app over USB-C.
+
+## Pages
+
+- [Home](https://aperi.photo/): what it does, measured speed, real screens, the coach, cameras, pricing, FAQ, beta links
+- [Bring your own key](https://aperi.photo/byok.html): what Google, Anthropic, OpenAI and Aperi's own key do with photographs, quoted from their terms
+- [About](https://aperi.photo/about.html): who builds it and why
+- [Aperi vs Shutter+](https://aperi.photo/vs/shutter-plus.html)
+- [Aperi vs ShutterCoach](https://aperi.photo/vs/shuttercoach.html)
+- [Privacy policy](https://aperi.photo/privacy.html)
+- [Terms](https://aperi.photo/terms.html)
+
+## Beta
+
+- iPhone: https://testflight.apple.com/join/GAdKfhEf
+- Android: https://play.google.com/apps/testing/photo.aperi.app
+- Contact: support@aperi.photo

@@ -1,0 +1,16 @@
+# aperi.photo — everyone is welcome to read it, people and assistants alike.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://aperi.photo/sitemap.xml

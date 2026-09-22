@@ -3,25 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aperi: bring your own key</title>
-<meta name="description" content="Use Aperi's coach on your own API key from Google, Anthropic or OpenAI: it stays on your phone, and here is what each provider says about your photographs.">
-<meta property="og:title" content="Aperi: bring your own key">
-<meta property="og:description" content="Use Aperi's coach on your own API key from Google, Anthropic or OpenAI: it stays on your phone, and here is what each provider says about your photographs.">
+<title>Aperi vs Shutter+</title>
+<meta name="description" content="Aperi and Shutter+ compared for Sony shooters: remote control, AI coaching, platforms and prices, from each product&#x27;s own published pages.">
+<meta property="og:title" content="Aperi vs Shutter+">
+<meta property="og:description" content="Aperi and Shutter+ compared for Sony shooters: remote control, AI coaching, platforms and prices, from each product&#x27;s own published pages.">
 <meta property="og:type" content="website">
 <!-- Absolute URLs are required here: a relative og:image does not resolve in
      link previews and silently shows nothing. -->
-<meta property="og:url" content="https://aperi.photo/byok.html">
+<meta property="og:url" content="https://aperi.photo/vs/shutter-plus.html">
 <meta property="og:image" content="https://aperi.photo/img/share.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Aperi: bring your own key">
-<meta name="twitter:description" content="Use Aperi's coach on your own API key from Google, Anthropic or OpenAI: it stays on your phone, and here is what each provider says about your photographs.">
+<meta name="twitter:title" content="Aperi vs Shutter+">
+<meta name="twitter:description" content="Aperi and Shutter+ compared for Sony shooters: remote control, AI coaching, platforms and prices, from each product&#x27;s own published pages.">
 <meta name="twitter:image" content="https://aperi.photo/img/share.jpg">
-<link rel="canonical" href="https://aperi.photo/byok.html">
+<link rel="canonical" href="https://aperi.photo/vs/shutter-plus.html">
 <meta name="theme-color" content="#101418">
-<link rel="icon" href="favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../img/icon-180.png">
 <style>
   /* Foundation */
   :root {
@@ -433,6 +433,19 @@
       scroll-behavior: auto;
     }
   }
+
+  .compare { width: 100%; border-collapse: collapse; font-size: .9375rem; }
+  .compare th, .compare td { padding: 14px 12px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .compare th { color: var(--text); font-weight: 500; }
+  .compare thead th { color: var(--dim); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; border-top: 0; }
+  .compare td { color: var(--muted); }
+  .compare td.us { color: var(--text); }
+  .table-wrap { overflow-x: auto; }
+  .verdict-copy { max-width: 62ch; display: grid; gap: 16px; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.125rem); }
+  .verdict-copy strong { color: var(--text); font-weight: 500; }
+  .beta-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .cta { display: inline-block; padding: 14px 22px; border-radius: 12px; background: var(--primary); color: #101418; font-weight: 700; text-decoration: none; }
+  .checked { color: var(--dim); font-size: .875rem; }
 </style>
 </head>
 <body>
@@ -440,144 +453,131 @@
 
 <header class="masthead">
   <div class="shell masthead-inner">
-    <a class="mark" href="index.html#main" aria-label="Aperi home">
-      <img src="img/icon-180.png" width="180" height="180" alt="Aperi app icon" decoding="async">APERI
+    <a class="mark" href="../index.html" aria-label="Aperi home">
+      <img src="../img/icon-180.png" width="180" height="180" alt="Aperi app icon" decoding="async">APERI
     </a>
     <nav aria-label="Primary">
-      <a href="index.html#fast">Fast</a>
-      <a href="index.html#screens">Screens</a>
-      <a href="index.html#ways">Ways to use it</a>
-      <a href="index.html#coach">The coach</a>
-      <a href="index.html#cameras">Cameras</a>
-      <a href="index.html#pricing">Pricing</a>
-      <a href="byok.html" aria-current="page">BYOK</a>
-      <a href="about.html">About</a>
-      <a href="index.html#beta">Beta</a>
+      <a href="../index.html#fast">Fast</a>
+      <a href="../index.html#screens">Screens</a>
+      <a href="../index.html#ways">Ways to use it</a>
+      <a href="../index.html#coach">The coach</a>
+      <a href="../index.html#cameras">Cameras</a>
+      <a href="../index.html#pricing">Pricing</a>
+      <a href="../byok.html">BYOK</a>
+      <a href="../about.html">About</a>
+      <a href="../index.html#beta">Beta</a>
     </nav>
   </div>
 </header>
 
 <main id="main" class="shell" tabindex="-1">
   <section class="hero" aria-labelledby="hero-title">
-    <p class="eyebrow">Bring your own key</p>
-    <h1 id="hero-title">Your key, <span>your photographs.</span></h1>
-    <p class="sub">The coach can run on Aperi's own key, or on an API key you get
-      yourself from Google, Anthropic or OpenAI. Your own key stays on your phone and the photo goes
-      straight to the provider you chose; Aperi's key stays on our server, and
-      the photo passes through a relay that keeps none of it. This page says,
-      in each provider's own words, what happens to it there.</p>
+    <div class="hero-copy">
+      <p class="eyebrow">Compared</p>
+      <h1 id="hero-title">Aperi vs Shutter+</h1>
+      <p class="sub">Both put a Sony camera on your phone. One of them also tells you why the shot is not working.</p>
+    </div>
   </section>
 
-  <section class="section" aria-labelledby="providers-title">
+  <section class="section" aria-labelledby="table-title">
     <div class="section-head">
-      <h2 id="providers-title">Where your photograph goes</h2>
-      <p class="fineprint">Checked against the providers' published terms on
-        <time datetime="2026-09-15">2026-09-15</time>.</p>
+      <div>
+        <span class="eyebrow">Side by side</span>
+        <h2 id="table-title">What each one does</h2>
+      </div>
+      <p class="lede checked">Shutter+ facts from shutter.dev and its pricing page, checked 21 September 2026. Aperi facts as on this site.</p>
     </div>
-
-    <div class="provider-grid">
-      <article class="provider-card" aria-labelledby="google-title">
-        <h3 id="google-title">Google Gemini API</h3>
-        <p class="key-source">Get a key: console at aistudio.google.com</p>
-        <p class="training-label">Used for training?</p>
-
-        <h4 class="tier">Paid tier</h4>
-        <p class="verdict">Not used for training</p>
-        <blockquote>
-          <p>“Google doesn't use your prompts (including associated system
-            instructions, cached content, and files such as images, videos, or
-            documents) or responses to improve our products.”</p>
-        </blockquote>
-        <p class="provider-note">Logged only to detect violations of their
-          prohibited-use policy.</p>
-
-        <h4 class="tier">Unpaid (free) tier</h4>
-        <p class="verdict verdict-warning">Used to improve Google's products</p>
-        <blockquote>
-          <p>Google “uses the content you submit to the Services and any generated
-            responses to provide, improve, and develop Google products and services”,
-            and “human reviewers may read, annotate, and process your API input and output”.</p>
-        </blockquote>
-        <p class="provider-note">Users in the European Economic Area, Switzerland
-          or the United Kingdom get the paid-tier terms on the free tier too.</p>
-        <p class="fineprint">Terms last updated
-          <time datetime="2026-04-28">2026-04-28</time>.</p>
-        <p class="warning">If you use a free-tier Gemini key, your photographs can
-          be read by people at Google. Turn on billing, or choose another provider,
-          if that is not acceptable to you.</p>
-      </article>
-
-      <article class="provider-card" aria-labelledby="anthropic-title">
-        <h3 id="anthropic-title">Anthropic Claude API</h3>
-        <p class="key-source">Get a key: console.anthropic.com</p>
-        <p class="training-label">Used for training?</p>
-        <p class="verdict">Not used for training</p>
-        <blockquote>
-          <p>“Anthropic may not train models on Customer Content from Services.”</p>
-        </blockquote>
-        <p class="fineprint">Commercial Terms, effective
-          <time datetime="2025-06-17">2025-06-17</time>.</p>
-      </article>
-
-      <article class="provider-card" aria-labelledby="openai-title">
-        <h3 id="openai-title">OpenAI API</h3>
-        <p class="key-source">Get a key: platform.openai.com</p>
-        <p class="training-label">Used for training?</p>
-        <p class="verdict">Not used for training</p>
-        <blockquote>
-          <p>Data sent to the API “is not used to train or improve OpenAI models
-            (unless you explicitly opt in to share data with us)”.</p>
-        </blockquote>
-        <p class="provider-note">Abuse-monitoring logs are kept for up to 30 days,
-          then deleted.</p>
-        <p class="fineprint">Policy in force since
-          <time datetime="2023-03-01">2023-03-01</time>.</p>
-      </article>
-
-      <article class="provider-card" aria-labelledby="aperi-title">
-        <h3 id="aperi-title">Aperi coach (our key)</h3>
-        <p class="key-source">No key to get: choose Aperi coach in the app.</p>
-        <p class="training-label">Used for training?</p>
-        <p class="verdict">Not used for training</p>
-        <p class="provider-note">Runs on the OpenAI API under the same terms as
-          above, on a key we hold. Our relay meters usage and forwards the frame;
-          it never stores your photograph, your question or the reply, and the
-          usage rows it keeps are pruned after 90 days. We will never enable a
-          data-sharing or training option on our key, and we will never train
-          models of our own on your photographs.</p>
-        <p class="provider-note"><a href="privacy.html">Read the privacy policy →</a></p>
-      </article>
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th scope="col"></th><th scope="col">Aperi</th><th scope="col">Shutter+</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">Camera remote: live view, focus, shutter, exposure</th>
+          <td class="us">Yes. Free forever, no account.</td>
+          <td>Yes. Subscription or lifetime purchase after a 7-day trial.</td>
+        </tr>
+        <tr>
+          <th scope="row">Coaching on the frame, reading the camera settings</th>
+          <td class="us">Yes. Reads shutter, aperture, ISO and focus mode from the body; answers in seconds; speaks it.</td>
+          <td>No coaching or photo feedback described.</td>
+        </tr>
+        <tr>
+          <th scope="row">Hands-free from earbuds</th>
+          <td class="us">Yes. Double-press to coach the last shot, single-press to ask.</td>
+          <td>Not described.</td>
+        </tr>
+        <tr>
+          <th scope="row">Apple Watch</th>
+          <td class="us">Yes: the shot on the wrist, &quot;How&#x27;s this?&quot;, the answer spoken.</td>
+          <td>Yes: a full-featured Apple Watch app.</td>
+        </tr>
+        <tr>
+          <th scope="row">Platforms</th>
+          <td class="us">iPhone and Android.</td>
+          <td>iPhone, iPad and Apple Watch.</td>
+        </tr>
+        <tr>
+          <th scope="row">Cameras</th>
+          <td class="us">Sony A7 V tested; same-generation Alpha bodies should work. Canon and Nikon coming.</td>
+          <td>Sony, Canon and Fujifilm, one licence for all three.</td>
+        </tr>
+        <tr>
+          <th scope="row">Camera link</th>
+          <td class="us">USB-C, the camera&#x27;s own Wi-Fi Direct, or your router.</td>
+          <td>Per its listing; see shutter.dev.</td>
+        </tr>
+        <tr>
+          <th scope="row">Price, camera features</th>
+          <td class="us">Free.</td>
+          <td>$3.49 a month, $24.99 a year, or $65 once.</td>
+        </tr>
+        <tr>
+          <th scope="row">Price, coaching</th>
+          <td class="us">Beta: 10 replies every 24 hours free, or unlimited on your own key. After: $4.99 a month or $39.99 a year.</td>
+          <td>Not offered.</td>
+        </tr>
+        <tr>
+          <th scope="row">Bring your own AI key</th>
+          <td class="us">Yes: Google, Anthropic or OpenAI; free and unlimited.</td>
+          <td>Not applicable.</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <section class="section details" aria-labelledby="aperi-does-title">
-    <h2 id="aperi-does-title">What Aperi itself does</h2>
-    <div class="details-copy">
-      <ul>
-        <li>Your own key is stored on the phone (in the Keychain on iPhone) and sent
-          only to its own provider's API, never to us.</li>
-        <li>The coach receives the live-view frame or the last shot plus the
-          camera's settings as text, never a screenshot of the app.</li>
-        <li>Conversation history keeps only the most recent frame as an image.</li>
-        <li>Nothing is uploaded until you press send or ask.</li>
-      </ul>
+  <section class="section" aria-labelledby="verdict-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Which to pick</span>
+        <h2 id="verdict-title">The honest answer</h2>
+      </div>
     </div>
-  </section>
-
-  <section class="section details" aria-labelledby="choose-title">
-    <h2 id="choose-title">Which to choose</h2>
-    <p class="details-copy">Aperi coach for zero setup and a few free turns a day;
-      your own key for unlimited use at the provider's prices; the Gemini free
-      tier only if you are fine with the terms above.</p>
+    <div class="verdict-copy">
+      <p><strong>Pick Shutter+ if</strong> you shoot Canon or Fujifilm, want an iPad
+        app, or want a mature remote with years of releases behind it and no
+        interest in coaching.</p>
+      <p><strong>Pick Aperi if</strong> you shoot a recent Sony Alpha, you want the
+        remote for free, and you want a coach that reads the camera while you
+        shoot. Aperi is in open beta and honest about what is tested: one body on
+        the desk, the rest as marked on the compatibility list.</p>
+      <div class="beta-links">
+        <a class="cta" href="https://testflight.apple.com/join/GAdKfhEf" rel="noopener">Join the iPhone beta →</a>
+        <a class="cta" href="https://play.google.com/apps/testing/photo.aperi.app" rel="noopener">Join the Android beta →</a>
+      </div>
+      <p class="fineprint">Shutter+ is a product of its own developer; Aperi is not affiliated with it. Their prices and features are quoted from their public pages on the date above and may change.</p>
+    </div>
   </section>
 </main>
 
 <div class="shell">
   <footer>
     <nav aria-label="Legal and contact">
-      <a href="about.html">About</a><span aria-hidden="true">·</span>
-      <a href="privacy.html">Privacy</a><span aria-hidden="true">·</span>
-      <a href="terms.html">Terms</a><span aria-hidden="true">·</span>
+      <a href="../about.html">About</a><span aria-hidden="true">·</span>
+      <a href="../privacy.html">Privacy</a><span aria-hidden="true">·</span>
+      <a href="../terms.html">Terms</a><span aria-hidden="true">·</span>
       <a href="mailto:support@aperi.photo">Contact</a>
     </nav>
     <p>Android and Google Play are trademarks of Google LLC; Apple, iPhone, Apple
